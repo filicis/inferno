@@ -1,7 +1,7 @@
 <?php
 
 /**
- * inferno: Lægelig Skemalægning
+ * inferno: Værktøj til Lægelig Skemalægning
  *
  *
  */
@@ -20,6 +20,7 @@ use Doctrine\ORM\Mapping as ORM;
  *	password			: Krypteret password							 
  *  navn					: Brugerens fulde navn
  * 	roles					: Brugerens roller i systemet - ikke at forveksle med rolle i de enkelte afdelinger
+ *  oprettet			: Datoen for brugerens oprettelse i systemet.
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
  */
@@ -53,6 +54,13 @@ class User
      * @ORM\Column(type="boolean")
      */
     private $is_active;
+    
+    /**
+     * @ORM\Column(type="date")
+     */
+     
+    private $oprettet; 
+    
 
     public function getId()
     {
@@ -105,5 +113,10 @@ class User
         $this->is_active = $is_active;
 
         return $this;
+    }
+    
+    public function getOprettet(): ?datetime
+    {
+    	return $this->oprettet;
     }
 }
