@@ -9,6 +9,10 @@
 namespace App\Entity;
 
 use Doctrine\ORM\Mapping as ORM;
+use Symfony\Component\Validator\Constraints as Assert;
+use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
+use Symfony\Component\Security\Core\User\UserInterface;
+
 
 /**
  * Bruger tabellen
@@ -23,30 +27,61 @@ use Doctrine\ORM\Mapping as ORM;
  *  oprettet			: Datoen for brugerens oprettelse i systemet.
  *
  * @ORM\Entity(repositoryClass="App\Repository\UserRepository")
+ * @UniqueEntity(fields="email", message="Email already taken")
+ * @UniqueEntity(fields="username", message="Username already taken")
  */
 
-class User
+class User implements UserInterface
 {
     /**
+		 * id
+		 *	
      * @ORM\Id()
-     * @ORM\GeneratedValue()
+     * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
      */
     private $id;
 
 
     /**
+     * username
+     *
      * @ORM\Column(type="string", length=25, unique=true)
+     * @Assert\NotBlank()    
      */
+
     private $username;
 
     /**
+     * navn
+     *
+     * @ORM\Column(type="string", length=64)
+     */
+     
+    private $navn;
+    
+    /**
+     * @Assert\NotBlank()
+     * @Assert\Length(max=4096)
+     */
+     
+    private $plainPassword;
+
+
+    /**
+     * password
+     * 
+     * The below length depends on the "algorithm" you use for encoding
+     * the password, but this works well with bcrypt.
+     *
      * @ORM\Column(type="string", length=64)
      */
     private $password;
 
     /**
-     * @ORM\Column(type="string", length=64, unique=true)
+     * @ORM\Column(type="string", length=255, unique=true)
+     * @Assert\NotBlank()
+     * @Assert\Email()
      */
     private $email;
 
@@ -60,6 +95,22 @@ class User
      */
      
     private $oprettet; 
+    
+    /**
+     * roles
+     *
+     * @ORM\Column(type="array")
+     */
+
+    private $roles;
+
+    public function __construct()
+    {
+        $this->roles = array('ROLE_USER');
+        $this->is_active= true;
+        $this->oprettet= new \DateTime();
+    }
+
     
 
     public function getId()
@@ -79,6 +130,19 @@ class User
         return $this;
     }
 
+    public function getNavn(): ?string
+    {
+        return $this->navn;
+    }
+
+    public function setNavn(string $navn): self
+    {
+        $this->navn = $navn;
+
+        return $this;
+    }
+    
+    
     public function getPassword(): ?string
     {
         return $this->password;
@@ -119,4 +183,31 @@ class User
     {
     	return $this->oprettet;
     }
+    
+    public function getPlainPassword()
+    {
+        return $this->plainPassword;
+    }
+
+    public function setPlainPassword($password)
+    {
+        $this->plainPassword = $password;
+    }
+    
+        public function getSalt()
+    {
+        // The bcrypt and argon2i algorithms don't require a separate salt.
+        // You *may* need a real salt if you choose a different encoder.
+        return null;
+    }
+
+    public function getRoles()
+    {
+        return $this->roles;
+    }
+
+    public function eraseCredentials()
+    {
+    }
+
 }
