@@ -31,7 +31,7 @@ use Symfony\Component\Security\Core\User\UserInterface;
  * @UniqueEntity(fields="username", message="Username already taken")
  */
 
-class User implements UserInterface
+class User implements UserInterface, \Serializable
 {
     /**
 		 * id
@@ -106,7 +106,7 @@ class User implements UserInterface
 
     public function __construct()
     {
-        $this->roles = array('ROLE_USER');
+        $this->roles = array('ROLE_USER', 'ROLE_ADMIN');
         $this->is_active= true;
         $this->oprettet= new \DateTime();
     }
@@ -209,5 +209,36 @@ class User implements UserInterface
     public function eraseCredentials()
     {
     }
+    
+      /** @see \Serializable::serialize() */
+    public function serialize()
+    {
+        return serialize(array(
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->navn,
+            $this->roles,
+            $this->isActive,
+            // see section on salt below
+            // $this->salt,
+        ));
+    }
+
+    /** @see \Serializable::unserialize() */
+    public function unserialize($serialized)
+    {
+        list (
+            $this->id,
+            $this->username,
+            $this->password,
+            $this->navn,
+            $this->roles,
+            $this->isActive,
+            // see section on salt below
+            // $this->salt
+        ) = unserialize($serialized);
+    }
+
 
 }
