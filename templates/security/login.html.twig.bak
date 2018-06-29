@@ -10,7 +10,7 @@
 
 <p>
 <h1>Inferno</h1>
-<h2> - Et værktøj til lægelig skemalægning</h2>
+<h2> - Login</h2>
 </p>
 
    <div>
@@ -18,8 +18,8 @@
         {#{ form_widget(our_form) }#}
         
         
-        {{ form_row(our_form.username)}}
-        {{ form_row(our_form.password)}}
+        {{ form_row(our_form._username)}}
+        {{ form_row(our_form._password)}}
         
         <div class="form-group row">
             <div class="col-2"></div>

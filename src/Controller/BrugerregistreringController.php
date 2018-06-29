@@ -51,6 +51,18 @@ class BrugerregistreringController extends Controller
             array('form' => $form->createView())
         );
     }
+    
+    
+    /**
+     * skiftPassword
+     *
+     * @Route("/profile/skiftPassword", name="skiftPassword")
+     */
+     
+    public function skiftPassword()
+    {
+    	
+    } 
  
     public function index()
     {

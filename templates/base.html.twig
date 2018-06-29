@@ -11,6 +11,47 @@
         {% block stylesheets %}{% endblock %}
     </head>
     <body>
+    
+    <header>
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+        <div class="container">
+
+            <a class="navbar-brand" href="{{ path('ita_document') }}">Home</a>
+
+            <div class="collapse navbar-collapse">
+                <ul class="navbar-nav mr-auto">
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ita_document') }}">Hello Page</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ita_document') }}">Contact</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('ita_document') }}">Brugerregistrering</a>
+                    </li>
+                    
+                   {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %} 
+                    <li class="navbar-text">
+                      Michael
+                    </li> 
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('/logout') }}">Logout</a>
+                    </li>
+                    
+                    {% else %}
+
+                    <li class="nav-item">
+                        <a class="nav-link" href="{{ path('login') }}">Login</a>
+                    </li>
+
+                    {% endif %}
+                    
+                 
+                </ul>
+            </div>
+        </div>
+    </nav>
+</header>
  
  <main role="main" class="container main">
    
