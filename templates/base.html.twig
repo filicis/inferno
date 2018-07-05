@@ -32,10 +32,10 @@
                     
                    {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %} 
                     <li class="navbar-text">
-                      Michael
+                      {{ app.user.username }}
                     </li> 
                     <li class="nav-item">
-                        <a class="nav-link" href="{{ path('/logout') }}">Logout</a>
+                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
                     </li>
                     
                     {% else %}
