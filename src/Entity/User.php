@@ -8,6 +8,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
@@ -104,11 +106,17 @@ class User implements UserInterface, \Serializable
 
     private $roles;
 
+    /**
+     * @ORM\ManyToMany(targetEntity="App\Entity\Afsnit", mappedBy="users")
+     */
+    private $afsnits;
+
     public function __construct()
     {
         $this->roles = array('ROLE_USER', 'ROLE_ADMIN');
         $this->is_active= true;
         $this->oprettet= new \DateTime();
+        $this->afsnits = new ArrayCollection();
     }
 
     
@@ -238,6 +246,34 @@ class User implements UserInterface, \Serializable
             // see section on salt below
             // $this->salt
         ) = unserialize($serialized);
+    }
+
+    /**
+     * @return Collection|Afsnit[]
+     */
+    public function getAfsnits(): Collection
+    {
+        return $this->afsnits;
+    }
+
+    public function addAfsnit(Afsnit $afsnit): self
+    {
+        if (!$this->afsnits->contains($afsnit)) {
+            $this->afsnits[] = $afsnit;
+            $afsnit->addUser($this);
+        }
+
+        return $this;
+    }
+
+    public function removeAfsnit(Afsnit $afsnit): self
+    {
+        if ($this->afsnits->contains($afsnit)) {
+            $this->afsnits->removeElement($afsnit);
+            $afsnit->removeUser($this);
+        }
+
+        return $this;
     }
 
 
