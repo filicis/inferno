@@ -64,8 +64,14 @@ class Afdeling
      */
     private $oprettet;
 
+    /**
+     * @ORM\Column(type="string", length=64)
+     */
+    private $institution;
+
     public function __construct()
     {
+    	 	$this->is_active= true;
         $this->oprettet= new \DateTime();
         $this->afsnits = new ArrayCollection();
     }
@@ -162,6 +168,18 @@ class Afdeling
     public function setOprettet(\DateTimeInterface $oprettet): self
     {
         $this->oprettet = $oprettet;
+
+        return $this;
+    }
+
+    public function getInstitution(): ?string
+    {
+        return $this->institution;
+    }
+
+    public function setInstitution(string $institution): self
+    {
+        $this->institution = $institution;
 
         return $this;
     }
