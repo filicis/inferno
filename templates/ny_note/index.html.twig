@@ -1,0 +1,44 @@
+{#
+			Skabelon til redigering af Noter		
+
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NyNoteController!{% endblock %}
+
+{% block body %}
+
+
+<h1>Note</h1>
+
+</p>
+
+   <div>
+        {{ form_start(our_form) }}
+        {{ form_widget(our_form) }}
+        
+        <ul>
+          {% set mydata = app.session.get('mydata') %}
+          {% for key,item in mydata %}
+            <li> {{ key }} - {{ item }} </li>
+          {% endfor %}
+        </ul>
+
+        
+        
+        <div class="form-group row">
+            <div class="col-2"></div>
+            <div class="col">
+                <input type="submit" value="Send" class="btn btn-success" />
+            </div>
+        </div>  
+        
+        {{ form_rest(our_form) }}      
+        {{ form_end(our_form) }}
+    </div>
+    
+
+    
+
+{% endblock %}

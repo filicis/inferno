@@ -1,0 +1,21 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AfsnitsController!{% endblock %}
+
+{% block body %}
+
+<h1>Intensiv Afsnittet RHE</h1>
+<h2>Indlagte</h2>
+
+          {% set indlagte = app.session.get('indlagte') %}
+          {% for key,item in indlagte %}
+            {{ key }}
+						{% if item %}
+ 								<a href="{{ url('ny_note') }}">{{ item }}</a>
+ 						{% endif %}
+ 						<br>
+          {% endfor %}
+
+					<a href="">Indlæg ny</a>
+
+{% endblock %}

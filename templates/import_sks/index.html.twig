@@ -1,0 +1,41 @@
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello ImportSksController!{% endblock %}
+
+{% block body %}
+<style>
+    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
+    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
+</style>
+
+
+<h1> Importer Sygehusafdelingsklassifikationen</h1>
+
+</p>
+
+   <div>
+        {{ form_start(our_form) }}
+        {{ form_widget(our_form) }}
+        
+        {{ form_row(our_form._file) }}
+        
+        <div class="form-group row">
+            <div class="col-2"></div>
+            <div class="col">
+                <input type="submit" value="Send" class="btn btn-success" />
+            </div>
+        </div>        
+        {{ form_end(our_form) }}
+    </div>
+    
+<p>
+  Klassifikationen hentes på <a href= 'http://medinfo.dk/sks/dump.php' target='_blank'>Sundhedsdata-Styrelsens SKS-dumper side</a>. 
+  <ul> 
+    <li>Vælg Sygehusafdelingsklassifikationen
+    <li>Vælg filformatet CSV
+    <li>Vælg layout Kode + Kodetekst
+  </ul>
+</p>    
+
+{% endblock %}
