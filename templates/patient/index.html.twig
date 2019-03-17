@@ -1,0 +1,31 @@
+
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Ny Patient{% endblock %}
+
+{% block body %}
+
+<h1>Patient</h1>
+
+</p>
+
+   <div>
+        {{ form_start(our_form) }}
+        {{ form_widget(our_form) }}
+        
+       
+        
+        <div class="form-group row">
+            <div class="col-2"></div>
+            <div class="col">
+                <input type="submit" value="Send" class="btn btn-success" />
+            </div>
+        </div>  
+        
+        {{ form_rest(our_form) }}      
+        {{ form_end(our_form) }}
+    </div>
+
+{% endblock %}

@@ -26,6 +26,11 @@ class Skstable
      */
     private $tekst;
 
+    /**
+     * @ORM\Column(type="string", length=10)
+     */
+    private $test;
+
     public function getId(): ?int
     {
         return $this->id;
@@ -51,6 +56,18 @@ class Skstable
     public function setTekst(string $tekst): self
     {
         $this->tekst = $tekst;
+
+        return $this;
+    }
+
+    public function getTest(): ?string
+    {
+        return $this->test;
+    }
+
+    public function setTest(string $test): self
+    {
+        $this->test = $test;
 
         return $this;
     }
