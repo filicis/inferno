@@ -1,90 +1,85 @@
 <!DOCTYPE html>
 <html lang="da">
-    <head>
-        <meta charset="UTF-8">
-        <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+	<head>
 
-    		<!-- Bootstrap CSS -->
-		<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+    	<!-- Nødvendige Meta Tags -->
 
+		<meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
+    {% block stylesheets %}
+
+			<!-- Vi benytter os af Bootstrap -->
+
+			<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/css/bootstrap.min.css"
+		  	integrity="sha384-Vkoo8x4CGsO3+Hhxv8T/Q5PaXtkKtu6ug5TOeNV6gBiFeWPGFN9MuhOf23Q9Ifjh" crossorigin="anonymous">
+
+    {% endblock %}
 
 
         <title>{% block title %}Inferno - Lægelig Vagtplanlægning{% endblock %}</title>
-        {% block stylesheets %}{% endblock %}
+
     </head>
+
     <body>
-    
-    <header>
+
+		<!-- NAVBAR Start under revision -->
+    <!-- Programmets Hovedmenu -->
+
+
     <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
-        <div class="container">
+  		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
+    		<span class="navbar-toggler-icon"></span>
+  		</button>
 
-            <a class="navbar-brand" href="{{ path('ita_document') }}">Home</a>
+   		<!-- Selve menu strukturen -->
 
-            <div class="collapse navbar-collapse">
-               <ul class="navbar-nav mr-auto">
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('ita_document') }}">Hello Page</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('afsnit') }}">Afsnit</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('ita_document') }}">Brugerregistrering</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('ny_note') }}">Ny note</a>
-                    </li>
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('patient') }}">Ny patient</a>
-                    </li>
+    	<div class="collapse navbar-collapse" id="navbarNavAltMarkup">
+				<a class="navbar-brand" href="{{ path('ita_document') }}">Inferno</a>
+        <!-- div class="collapse navbar-collapse" -->
+          <div class="navbar-nav mr-auto">
+            <a class="nav-item nav-link" href="{{ path('ita_document') }}">Hello Page</a>
+            <a class="nav-item nav-link" href="{{ path('afsnit') }}">Afsnit</a>
+                        <a class="nav-item nav-link" href="{{ path('brugerregistrering') }}">Brugerregistrering</a>
+                        <a class="nav-item nav-link" href="{{ path('ny_note') }}">Ny note</a>
+                        <a class="nav-item nav-link" href="{{ path('patient') }}">Ny patient</a>
+                        <a class="nav-item nav-link" href="{{ path('hospitaler') }}">Hospitaler</a>
+		    		<a class="nav-item nav-link" href="{{ path('ita_document') }}">Indstillinger</a>
+          </div>
+        <!-- /div -->
+      </div>
 
-		    <li class="nav-item">
-		    	<a class="nav-link" href="{{ path('ita_document') }}">Indstillinger</a>
-		    </li>
-                    
-                     
-                 
-                </ul>
-            </div>
-	    <div class="collapse navbar-collapse">
-	      <ul class="navbar-nav mr-auto">
-	      
-	                     {% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %} 
-                    <li class="navbar-text">
-                      {{ app.user.username }}
-                    </li> 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('logout') }}">Logout</a>
-                    </li>
-                    
-                    {% else %}
+	    <div class="navbar-expand d-flex flex-row-reverse" id="navbarNavAltMarkup">
+	      <div class="navbar-nav mr-auto">
+					{% if is_granted('IS_AUTHENTICATED_FULLY') or is_granted('IS_AUTHENTICATED_REMEMBERED') %}
+          	<span class="navbar-text"> {{ app.user.username }} </span>
+            <a class="nav-item nav-link" href="{{ path('logout') }}">Logout</a>
+					{% else %}
+            <a class="nav-item nav-link" href="{{ path('login') }}">Login</a>
+          {% endif %}
 
-                    <li class="nav-item">
-                        <a class="nav-link" href="{{ path('login') }}">Login</a>
-                    </li>
-
-                    {% endif %}
-   
-	      </ul>
-	    </div>
-        </div>
+	      	</div>
+	    	</div>
+    	</div>
     </nav>
-</header>
- 
- <main role="main" class="container main">
-   
+
+ 		<main role="main" class="container main">
+
         {% block body %}{% endblock %}
- </main>
-       
-            <!-- Optional JavaScript -->
-    <!-- jQuery first, then Popper.js, then Bootstrap JS -->
+ 		</main>
 
-	<script src="https://code.jquery.com/jquery-3.3.1.slim.min.js" integrity="sha384-q8i/X+965DzO0rT7abK41JStQIAqVgRVzpbzo5smXKp4YfRvH+8abtTE1Pi6jizo" crossorigin="anonymous"></script>
-	<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js" integrity="sha384-UO2eT0CpHqdSJQ6hJty5KVphtPhzWj9WO1clHTMGa3JDZwrnQq4sF86dIHNDz0W1" crossorigin="anonymous"></script>
 
-	<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/js/bootstrap.min.js" integrity="sha384-JjSmVgyd0p3pXB1rRibZUAYoIIy6OrQ6VrjIEaFf/nJGzIxFDsf4x0xIM+B07jRM" crossorigin="anonymous"></script>
+    {% block javascripts %}
 
-        {% block javascripts %}{% endblock %}
-  
-    </body>
+			<!-- Bootstrap relaterede scripts -->
+
+			<script src="https://code.jquery.com/jquery-3.4.1.slim.min.js"
+					integrity="sha384-J6qa4849blE2+poT4WnyKhv5vZF5SrPo0iEjwBvKU7imGFAV0wwj1yYfoRSJoZ+n" crossorigin="anonymous"></script>
+			<script src="https://cdn.jsdelivr.net/npm/popper.js@1.16.0/dist/umd/popper.min.js"
+					integrity="sha384-Q6E9RHvbIyZFJoft+2mJbHaEWldlvI9IOYy5n3zV9zzTtmI3UksdQRVvoxMfooAo" crossorigin="anonymous"></script>
+			<script src="https://stackpath.bootstrapcdn.com/bootstrap/4.4.1/js/bootstrap.min.js"
+					integrity="sha384-wfSDF2E50Y2D1uUdj0O3uMBJnjuUD4Ih7YwaYd1iqfktj0Uod8GCExl3Og8ifwB6" crossorigin="anonymous"></script>
+
+    {% endblock %}
+	</body>
 </html>

@@ -18,12 +18,14 @@
         {{ form_start(our_form) }}
         {{ form_widget(our_form) }}
         
-        <ul>
+
           {% set mydata = app.session.get('mydata') %}
           {% for key,item in mydata %}
-            <li> {{ key }} - {{ item }} </li>
+            <div class= "form-group">
+              <label for="{{ key }}">{{ key }}</label>
+              <textarea class="form-control" id="{{ key }}" inputstl rows="5">{{item}}</textarea>
+            </div>
           {% endfor %}
-        </ul>
 
         
         

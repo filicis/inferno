@@ -11,30 +11,36 @@ class Hospital
 {
     /**
      * @ORM\Id()
-     * @ORM\GeneratedValue()
-     * @ORM\Column(type="integer")
-     */
-    private $id;
-
-    /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Skstable", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\Column(type="string", length= 10)
      */
     private $sks;
 
-    public function getId(): ?int
-    {
-        return $this->id;
-    }
+    /**
+     * @ORM\Column(type="string", length=60)
+     */
+    private $navn;
 
-    public function getSks(): ?Skstable
+
+    public function getSks(): ?string
     {
         return $this->sks;
     }
 
-    public function setSks(Skstable $sks): self
+    public function setSks(string $sks): self
     {
         $this->sks = $sks;
+
+        return $this;
+    }
+
+    public function getNavn(): ?string
+    {
+        return $this->navn;
+    }
+
+    public function setNavn(string $navn): self
+    {
+        $this->navn = $navn;
 
         return $this;
     }

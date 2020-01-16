@@ -9,8 +9,7 @@
 {% block body %}
 
 <p>
-<h1>Inferno</h1>
-<h2> - Login</h2>
+<h1>Login</h1>
 </p>
 
    <div>
@@ -32,7 +31,9 @@
 
 
 {% if error %}
-    <div>{{ error.messageKey|trans(error.messageData, 'security') }}</div>
+    <div class="alert alert-danger" role="alert" >
+    	Login fejl: {{ error.messageKey|trans(error.messageData, 'security') }}
+    </div>
 {% endif %}
 
 
