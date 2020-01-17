@@ -4,8 +4,8 @@ namespace App\Repository;
 
 use App\Entity\Afdeling;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
-// use  Symfony\Bridge\Doctrine\Persistence\ManagerRegistry;
+// use Symfony\Bridge\Doctrine\RegistryInterface;
+use  Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Afdeling|null find($id, $lockMode = null, $lockVersion = null)
@@ -15,7 +15,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class AfdelingRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Afdeling::class);
     }

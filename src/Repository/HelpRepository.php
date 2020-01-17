@@ -4,7 +4,9 @@ namespace App\Repository;
 
 use App\Entity\Help;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
-use Symfony\Bridge\Doctrine\RegistryInterface;
+// use Symfony\Bridge\Doctrine\RegistryInterface;
+use  Doctrine\Persistence\ManagerRegistry;
+
 
 /**
  * @method Help|null find($id, $lockMode = null, $lockVersion = null)
@@ -14,7 +16,7 @@ use Symfony\Bridge\Doctrine\RegistryInterface;
  */
 class HelpRepository extends ServiceEntityRepository
 {
-    public function __construct(RegistryInterface $registry)
+    public function __construct(ManagerRegistry $registry)
     {
         parent::__construct($registry, Help::class);
     }
