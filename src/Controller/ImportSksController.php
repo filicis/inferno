@@ -9,14 +9,14 @@ namespace App\Controller;
 
 use App\Form\ImportSksType;
 use App\Form\LoginType;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 
 //
 //
-// 
+//
 
-class ImportSksController extends Controller
+class ImportSksController extends AbstractController
 {
     /**
      * @Route("/sysadm/importsks", name="import_sks")
@@ -24,18 +24,18 @@ class ImportSksController extends Controller
     public function index()
     {
     	  $form1= $this->createForm(ImportSksType::class);
-    	  
-    	
+
+
         $request = $this->render('import_sks/index.html.twig', ['our_form' => $form1, 'our_form' => $form1->createView(),
             'controller_name' => 'ImportSksController',
         ]);
-        
+
         if ($form1->isSubmitted() && $form1->isValid()) {
         	$data= $form1->getData();
-        	
+
         	return $this->redirect($this->generateUrl('/'));
         }
-        
+
         return $request;
     }
 }

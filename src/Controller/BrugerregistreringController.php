@@ -12,15 +12,15 @@ use App\Entity\User;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\Security\Core\Encoder\UserPasswordEncoderInterface;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 
-class BrugerregistreringController extends Controller
+class BrugerregistreringController extends AbstractController
 {
     /**
      * @Route("/brugerregistrering", name="brugerregistrering")
      */
-     
+
     public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
     {
         // 1) build the form
@@ -51,19 +51,19 @@ class BrugerregistreringController extends Controller
             array('form' => $form->createView())
         );
     }
-    
-    
+
+
     /**
      * skiftPassword
      *
      * @Route("/profile/skiftPassword", name="skiftPassword")
      */
-     
+
     public function skiftPassword()
     {
-    	
-    } 
- 
+
+    }
+
     public function index()
     {
         return $this->render('brugerregistrering/index.html.twig', [

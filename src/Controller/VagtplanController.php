@@ -1,7 +1,7 @@
 <?php
 
 /**
- *	inferno - 
+ *	inferno -
  *
  *	Brugernes indgang til vagtplanlægnings værktøjet
  * 	- Udgangspunktet er den aktuelle arbejdsplan
@@ -11,9 +11,9 @@
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class VagtplanController extends Controller
+class VagtplanController extends AbstractController
 {
     /**
      * @Route("/vagtplan", name="vagtplan")

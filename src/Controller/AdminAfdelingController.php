@@ -7,14 +7,16 @@ use App\Entity\Afdeling;
 
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+// use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class AdminAfdelingController extends Controller
+
+class AdminAfdelingController extends AbstractController
 {
     /**
      * @Route("/admin/afdeling", name="admin_afdeling")
      */
-     
+
         public function registerAfdeling(Request $request)
     {
         // 1) build the form
@@ -42,7 +44,7 @@ class AdminAfdelingController extends Controller
             array('form' => $form->createView())
         );
     }
- 
+
     public function index()
     {
         return $this->render('admin_afdeling/index.html.twig', [

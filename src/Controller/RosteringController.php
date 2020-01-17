@@ -4,15 +4,15 @@
  *	inferno
  *
  *	Skemalæggerens indgang til skemalægningsværktøjet
- * 	- 
+ * 	-
  */
 
 namespace App\Controller;
 
 use Symfony\Component\Routing\Annotation\Route;
-use Symfony\Bundle\FrameworkBundle\Controller\Controller;
+use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
-class RosteringController extends Controller
+class RosteringController extends AbstractController
 {
     /**
      * @Route("/rostering", name="rostering")
