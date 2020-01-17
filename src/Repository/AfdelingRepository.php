@@ -5,6 +5,7 @@ namespace App\Repository;
 use App\Entity\Afdeling;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Symfony\Bridge\Doctrine\RegistryInterface;
+// use  Symfony\Bridge\Doctrine\Persistence\ManagerRegistry;
 
 /**
  * @method Afdeling|null find($id, $lockMode = null, $lockVersion = null)
