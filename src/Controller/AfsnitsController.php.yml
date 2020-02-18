@@ -1,13 +1,13 @@
-<?php
+ï»¿<?php
 
 //
 //		AfsnitsController
 //
 //		Skal:		Vise et oversigtsbillede over indlagte i afsnittet
-//						Tillade indlæggelser og udskrivelser
+//						Tillade indl\u00E6ggelser og udskrivelser
 //						Kunne tildele sengepladser
 //
-//						Kunne vide et udskriftsvenligt billede med noter på samtlige indlagte
+//						Kunne vide et udskriftsvenligt billede med noter p\u00E5 samtlige indlagte
 //
 
 namespace App\Controller;
@@ -54,7 +54,7 @@ class AfsnitsController extends AbstractController
     										'Endo:' => 'Test7',
     										'Micro:' => 'Microbiologisk status',
     										'Andet:' => 'Andre problemstillinger',
-    										'Plan:' => 'Plan for kommende vagtperiode' );
+    										'Plan:' => 'Plan for kommende vagt' );
 
 
 
