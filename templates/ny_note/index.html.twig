@@ -1,5 +1,5 @@
 {#
-			Skabelon til redigering af Noter		
+			Skabelon til redigering af Noter
 
 #}
 
@@ -9,38 +9,30 @@
 
 {% block body %}
 
+	<h1>Note Note</h1>
+  <div class="container">
+  <div class="row">
+    {{ form_start(our_form) }}
 
-<h1>Note</h1>
+    {% set mydata = app.session.get('mydata') %}
+    {% for key,item in mydata %}
+         <!-- div class= "form-group" -->
+        <div class="">
+             <label for="{{ key }}">{{ key }}</label>
+           </div>
+           <div class="">
+              <textarea class="form-control bg-dark " id="{{ key }}" inputstl rows="5">{{item}}</textarea>
+					 </div>
+         <!-- /div -->
+    {% endfor %}
 
-</p>
+    <input type="submit" value="Send" class="btn btn-success" />
+    {{ form_widget(our_form) }}
 
-   <div>
-        {{ form_start(our_form) }}
-        {{ form_widget(our_form) }}
-        
+				{{ form_rest(our_form) }}
+      {{ form_end(our_form) }}
 
-          {% set mydata = app.session.get('mydata') %}
-          {% for key,item in mydata %}
-            <div class= "form-group">
-              <label for="{{ key }}">{{ key }}</label>
-              <textarea class="form-control" id="{{ key }}" inputstl rows="5">{{item}}</textarea>
-            </div>
-          {% endfor %}
-
-        
-        
-        <div class="form-group row">
-            <div class="col-2"></div>
-            <div class="col">
-                <input type="submit" value="Send" class="btn btn-success" />
-            </div>
-        </div>  
-        
-        {{ form_rest(our_form) }}      
-        {{ form_end(our_form) }}
-    </div>
-    
-
-    
+  </div>
+  </div>
 
 {% endblock %}

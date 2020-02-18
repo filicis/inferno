@@ -1,21 +1,48 @@
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello AfsnitsController!{% endblock %}
 
 {% block body %}
 
-<h1>Intensiv Afsnittet RHE</h1>
-<h2>Indlagte</h2>
+  <div class="container">
+    <h1 class="text-center">Intensiv Afsnittet RHE</h1>
+    <div class="row text-center">
+      <div class="col-md-3">
 
-          {% set indlagte = app.session.get('indlagte') %}
-          {% for key,item in indlagte %}
-            {{ key }}
+        <h6 class="alert alert-success text-left">Patient Oversigt</h6>
+				<div class="nav nav-pills nav-fill flex-column bg-light">
+         	{% for key,item in indlagte %}
+						<a class="nav-item nav-link disabled text-left" href="#">{{ key }}</a>
 						{% if item %}
- 								<a href="{{ url('ny_note') }}">{{ item }}</a>
+ 							<a class= "nav-item nav-link text-left" href="{{ url('ny_note') }}">{{ item }}</a>
  						{% endif %}
- 						<br>
-          {% endfor %}
+         	{% endfor %}
+        </div>
+
+    	</div>
+    	<div class="col-md-9">
+			<h6 class="alert alert-info text-left">CPR: 011244-2048 - Navn: Tove Jensen - Afd: A1</h6>
+    	<form class="row">
+    	    {% for key,item in mydata %}
+         <!-- div class= "form-group" -->
+        <div class="col-sm-2">
+             <label for="{{ key }}">{{ key }}</label>
+           </div>
+           <div class="col-sm-10">
+              <textarea class="form-control" id="{{ key }}" inputstl rows="1">{{item}}</textarea>
+					 </div>
+         <!-- /div -->
+    {% endfor %}
+     </form>
+
+      		<p>Her står en tekst omkring relevante patient</p>
 
 					<a class="btn btn-primary" role="button" href="">Indlæg ny</a>
+
+
+    	</div>
+  	</div>
+	</div>
 
 {% endblock %}
