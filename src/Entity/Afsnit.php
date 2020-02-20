@@ -30,7 +30,7 @@ class Afsnit
 
     /**
      * @ORM\ManyToOne(targetEntity="App\Entity\Afdeling", inversedBy="afsnits")
-     * @ORM\JoinColumn(nullable=false)
+     * @ORM\JoinColumn(nullable=true)
      */
     private $afdeling;
 
@@ -43,6 +43,11 @@ class Afsnit
      * @ORM\Column(type="date")
      */
     private $oprettet;
+
+    /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+    private $beds = [];
 
     public function __construct()
     {
@@ -124,6 +129,18 @@ class Afsnit
     public function setOprettet(\DateTimeInterface $oprettet): self
     {
         $this->oprettet = $oprettet;
+
+        return $this;
+    }
+
+    public function getBeds(): ?array
+    {
+        return $this->beds;
+    }
+
+    public function setBeds(?array $beds): self
+    {
+        $this->beds = $beds;
 
         return $this;
     }

@@ -10,7 +10,7 @@ use Symfony\Component\HttpFoundation\Response;
 class DefaultController extends AbstractController
 {
     /**
-     * @Route("/admin", name="admin")
+     * @Route("/admin/test", name="admin")
      */
     public function index()
     {

@@ -28,10 +28,13 @@
     <body>
 
 		<!-- NAVBAR Start under revision -->
-    <!-- Programmets Hovedmenu -->
+    <!-- Programmets Hovedmenu
+
+    		 Navbar er kun til skærm (Skjules under udprint !!)
+    -->
 
 
-    <nav class="navbar navbar-expand-sm navbar-dark bg-dark">
+    <nav class="navbar navbar-expand-sm navbar-dark bg-dark d-print-none">
   		<button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavAltMarkup" aria-controls="navbarNavAltMarkup" aria-expanded="false" aria-label="Toggle navigation">
     		<span class="navbar-toggler-icon"></span>
   		</button>
@@ -46,11 +49,12 @@
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ path('ita_document') }}">Hello Page</a>
             <a class="nav-item nav-link" href="{{ path('afsnit') }}">Afsnit</a>
-                        <a class="nav-item nav-link" href="{{ path('brugerregistrering') }}">Brugerregistrering</a>
-                        <a class="nav-item nav-link" href="{{ path('ny_note') }}">Ny note</a>
-                        <a class="nav-item nav-link" href="{{ path('patient') }}">Ny patient</a>
-                        <a class="nav-item nav-link" href="{{ path('hospitaler') }}">Hospitaler</a>
-		    		<a class="nav-item nav-link" href="{{ path('ita_document') }}">Indstillinger</a>
+            <a class="nav-item nav-link" href="{{ path('brugerregistrering') }}">Brugerregistrering</a>
+            <a class="nav-item nav-link" href="{{ path('ny_note') }}">Ny note</a>
+            <a class="nav-item nav-link" href="{{ path('patient') }}">Ny patient</a>
+            <a class="nav-item nav-link" href="{{ path('selectafsnit') }}">Vælg Afsnit</a>
+            <a class="nav-item nav-link" href="{{ path('hospitaler') }}">Hospitaler</a>
+		    		<a class="nav-item nav-link" href="{{ path('udprint') }}">Print</a>
           </div>
         <!-- /div -->
       </div>

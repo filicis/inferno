@@ -1,6 +1,6 @@
-# inferno
+# Inferno
 
-Webbaseret værktøj til lægelig vagtplanlægning, mv
+Webbaseret værktøj til lægelig vagtoverdragelse i Intensive Afsnit
 
 Projektet er endnu i opstartsfase og indeholder intil videre ikke brugbar funktionalitet
 

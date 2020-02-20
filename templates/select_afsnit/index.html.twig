@@ -1,0 +1,37 @@
+{#
+		Lader Brugeren vælge mellem de Afsnit som han har adgang til..
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello SelectAfsnitController!{% endblock %}
+
+{% block body %}
+
+  <div class="container">
+  <p></p>
+
+    {{form_start(our_form)}}
+    <div class="card">
+      <div class="card-header alert alert-success">Vælg afsnit</div>
+      <div class="card-body">
+        <h5 class="card-title">Vælg afsnit</h5>
+        {% for key,item in afsnit %}
+          <div class"form-check>
+          <input class="form-check-input" type="radio" value="{{ key }}" id="{{ key }}" name="sks">
+  				<label class="form-check-label" for="{{ key }}">
+    					{{ item }}
+  				</label>
+  				</div>
+  			{% endfor %}
+  		<p></p>
+      <button type="button" class="btn btn-primary">Primary</button>
+      <button type="button" class="btn btn-primary">Primary</button>
+      {{form_rest(our_form)}}
+      {{form_end(our_form)}}
+
+      </div>
+    </div
+  </div>
+
+{% endblock %}

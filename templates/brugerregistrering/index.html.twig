@@ -1,25 +1,34 @@
+{#
+		Bruger registrering
+
+
+#}
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Ny bruger{% endblock %}
 
 {% block body %}
 
-<p>
-<h1>Inferno</h1>
-<h2> - Et værktøj til lægelig skemalægning</h2>
-</p>
 
 
-<div>
-{{ form_start(form) }}
-    {{ form_row(form.username) }}
-    {{ form_row(form.navn) }}
-    {{ form_row(form.email) }}
-    {{ form_row(form.plainPassword.first) }}
-    {{ form_row(form.plainPassword.second) }}
+  <div class="container">
+		<p>
+			<h1>Brugerregistrering</h1>
+		</p>
 
-    <button type="submit">Register!</button>
-{{ form_end(form) }}
-</div>
+		{{ form_start(form) }}
+
+    	{{ form_row(form.username) }}
+    	{{ form_row(form.navn) }}
+    	{{ form_row(form.email) }}
+    	{{ form_row(form.plainPassword.first) }}
+    	{{ form_row(form.plainPassword.second) }}
+
+    	<button type="submit">Register!</button>
+		{{ form_end(form) }}
+
+	</div>
 
 {% endblock %}

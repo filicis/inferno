@@ -1,9 +1,9 @@
 <?php
 
- /**
-  *	inferno
-  *
-  */
+/**
+*	inferno
+*
+*/
 
 namespace App\Controller;
 
@@ -17,57 +17,59 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 
 class BrugerregistreringController extends AbstractController
 {
-    /**
-     * @Route("/brugerregistrering", name="brugerregistrering")
-     */
+	/**
+	* @Route("/admin/brugerregistrering", name="brugerregistrering")
+	*/
 
-    public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
-    {
-        // 1) build the form
-        $user = new User();
-        $form = $this->createForm(UserType::class, $user);
+	public function register(Request $request, UserPasswordEncoderInterface $passwordEncoder)
+	{
+		// 1) build the form
 
-        // 2) handle the submit (will only happen on POST)
-        $form->handleRequest($request);
-        if ($form->isSubmitted() && $form->isValid()) {
+		$user = new User();
+		$form = $this->createForm(UserType::class, $user);
 
-            // 3) Encode the password (you could also do this via Doctrine listener)
-            $password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
-            $user->setPassword($password);
+		// 2) handle the submit (will only happen on POST)
 
-            // 4) save the User!
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->persist($user);
-            $entityManager->flush();
+		$form->handleRequest($request);
+		if ($form->isSubmitted() && $form->isValid()) {
 
-            // ... do any other work - like sending them an email, etc
-            // maybe set a "flash" success message for the user
+			// 3) Encode the password (you could also do this via Doctrine listener)
+			$password = $passwordEncoder->encodePassword($user, $user->getPlainPassword());
+			$user->setPassword($password);
 
-            return $this->redirectToRoute('main');
-        }
+			// 4) save the User!
+			$entityManager = $this->getDoctrine()->getManager();
+			$entityManager->persist($user);
+			$entityManager->flush();
 
-        return $this->render(
-            'brugerregistrering/index.html.twig',
-            array('form' => $form->createView())
-        );
-    }
+			// ... do any other work - like sending them an email, etc
+			// maybe set a "flash" success message for the user
+
+			return $this->redirectToRoute('main');
+		}
+
+		return $this->render(
+		'brugerregistrering/index.html.twig',
+		array('form' => $form->createView())
+		);
+	}
 
 
-    /**
-     * skiftPassword
-     *
-     * @Route("/profile/skiftPassword", name="skiftPassword")
-     */
+	/**
+	* skiftPassword
+	*
+	* @Route("/profile/skiftPassword", name="skiftPassword")
+	*/
 
-    public function skiftPassword()
-    {
+	public function skiftPassword()
+	{
 
-    }
+	}
 
-    public function index()
-    {
-        return $this->render('brugerregistrering/index.html.twig', [
-            'controller_name' => 'BrugerregistreringController',
-        ]);
-    }
+	public function index()
+	{
+		return $this->render('brugerregistrering/index.html.twig', [
+		'controller_name' => 'BrugerregistreringController',
+		]);
+	}
 }
