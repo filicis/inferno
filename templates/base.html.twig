@@ -55,6 +55,25 @@
             <a class="nav-item nav-link" href="{{ path('selectafsnit') }}">Vælg Afsnit</a>
             <a class="nav-item nav-link" href="{{ path('hospitaler') }}">Hospitaler</a>
 		    		<a class="nav-item nav-link" href="{{ path('udprint') }}">Print</a>
+
+							<!-- Dropdown menuen 'Indstillinger' -->
+
+		    		<div class="nav-item dropdown">
+		    		  <a class="nav-link dropdown-toggle"
+		    		     role="button"
+		    		     id="navbarDropdown"
+		    		     data-toggle="dropdown"
+		    		     href="#"
+		    		     aria-haspopup="true"
+		    		     aria-expanded="false">Indstillinger</a>
+		    		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
+            		<a class="dropdown-item" href="{{path('brugere')}}">Brugere</a>
+            		<a class="dropdown-item" href="#">Afsnit</a>
+            		<div class="dropdown-divider"></div>
+            		<a class="dropdown-item" href="#">Ikke Implementeret</a>
+		    		  </div>
+
+		    		</div>
           </div>
         <!-- /div -->
       </div>

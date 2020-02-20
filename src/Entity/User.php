@@ -14,16 +14,17 @@ use Doctrine\ORM\Mapping as ORM;
 use Symfony\Component\Validator\Constraints as Assert;
 use Symfony\Bridge\Doctrine\Validator\Constraints\UniqueEntity;
 use Symfony\Component\Security\Core\User\UserInterface;
+// use Symfony\Component\Validator\Constraints\DateTime;
 
 
 /**
  * Bruger tabellen
  * - Indeholder stamdata på samtlige brugere der er tilknyttet systemet
- * 
+ *
  * Tabellens kolonner
  * 	id						: Database teknisk identifikator
  *	username			: Entydigt Bruger Identifikator, her typisk som RegionsID
- *	password			: Krypteret password							 
+ *	password			: Krypteret password
  *  navn					: Brugerens fulde navn
  * 	roles					: Brugerens roller i systemet - ikke at forveksle med rolle i de enkelte afdelinger
  *  oprettet			: Datoen for brugerens oprettelse i systemet.
@@ -37,7 +38,7 @@ class User implements UserInterface, \Serializable
 {
     /**
 		 * id
-		 *	
+		 *
      * @ORM\Id()
      * @ORM\GeneratedValue(strategy="AUTO")
      * @ORM\Column(type="integer")
@@ -49,7 +50,7 @@ class User implements UserInterface, \Serializable
      * username
      *
      * @ORM\Column(type="string", length=25, unique=true)
-     * @Assert\NotBlank()    
+     * @Assert\NotBlank()
      */
 
     private $username;
@@ -59,20 +60,20 @@ class User implements UserInterface, \Serializable
      *
      * @ORM\Column(type="string", length=64)
      */
-     
+
     private $navn;
-    
+
     /**
      * @Assert\NotBlank()
      * @Assert\Length(max=4096)
      */
-     
+
     private $plainPassword;
 
 
     /**
      * password
-     * 
+     *
      * The below length depends on the "algorithm" you use for encoding
      * the password, but this works well with bcrypt.
      *
@@ -91,13 +92,13 @@ class User implements UserInterface, \Serializable
      * @ORM\Column(type="boolean")
      */
     private $is_active;
-    
+
     /**
      * @ORM\Column(type="date")
      */
-     
-    private $oprettet; 
-    
+
+    private $oprettet;
+
     /**
      * roles
      *
@@ -119,7 +120,7 @@ class User implements UserInterface, \Serializable
         $this->afsnits = new ArrayCollection();
     }
 
-    
+
 
     public function getId()
     {
@@ -149,8 +150,8 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-    
-    
+
+
     public function getPassword(): ?string
     {
         return $this->password;
@@ -186,12 +187,12 @@ class User implements UserInterface, \Serializable
 
         return $this;
     }
-    
-    public function getOprettet(): ?datetime
+
+    public function getOprettet(): ? \DateTime
     {
     	return $this->oprettet;
     }
-    
+
     public function getPlainPassword()
     {
         return $this->plainPassword;
@@ -201,7 +202,7 @@ class User implements UserInterface, \Serializable
     {
         $this->plainPassword = $password;
     }
-    
+
         public function getSalt()
     {
         // The bcrypt and argon2i algorithms don't require a separate salt.
@@ -217,7 +218,7 @@ class User implements UserInterface, \Serializable
     public function eraseCredentials()
     {
     }
-    
+
       /** @see \Serializable::serialize() */
     public function serialize()
     {
