@@ -1,3 +1,14 @@
+{#
+
+
+  Picis Udskrift generator i A4 format med 0.5 tommers margin på alle sider opdeles i 64 x 44 felter
+  - Vi afsætter 3 felter til header og 1 felt til footer. Det efterlader os med arbejdsområdet 64 x 40 felter
+  - Hvert felt opdeles i 32 x 32, så vi får en SVG opløsning på 2048 x 1280
+  
+#}
+
+
+
 {% extends 'base.html.twig' %}
 
 {% block title %}Hello {{ controller_name }}!{% endblock %}
@@ -6,10 +17,56 @@
 
   <div class="container">
   <p><h1>SVG Test</h1></p>
-    <svg width="1000" height="1000">
-        <circle cx="50" cy="50" r="40" stroke="green" stroke-width="4" fill="yellow" />
-        <rect width="512" height="384" stroke-width="4" style="fill:blue;stroke:pink;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9"> </rect>
-        <line x1="64" y1="0" x2="64" y2="384" style="stroke:rgb(255,0,0);stroke-width:2" />
+  <p><h3>Leg med SVG som egentlig er dette projekt uvedkommende....</h3></p>
+  <p></p>
+  
+    <svg width="2948" height="1280">
+      <title>Bid af Postop Observationsskema</title>
+        
+        <rect width="704" height="32" stroke-width="0" style="fill:dodgerblue"></rect>
+        
+               <!-- Så de vertikale blå streger -->
+
+        {% for i in 13..43 %}
+          {% set xx = (i * 16) %}   
+          <line x1="{{xx}}" y1="670" x2="{{xx}}" y2="1024" style="stroke:dodgerblue;stroke-width:2" />
+        {% endfor %} 
+        
+          <!-- Derefter de horizontale blå streger -->
+
+        {% for i in 43..63 %}
+          {% set yy = (i * 16) %}   
+          <line x1="192" y1="{{yy}}" x2="704" y2="{{yy}}" style="stroke:dodgerblue;stroke-width:2" />
+        {% endfor %}  
+   
+        
+          <!-- Så definerer vi vores boks med rammer -->
+        
+        <rect width="704" height="1024" stroke-width="4" style="fill:blue;stroke:black;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9"> </rect>
+
+          <!-- Så kommer de 8 vertikale streger -->
+
+        {% for i in 3..10 %}
+          {% set xx = (i * 64) %}   
+          <line x1="{{xx}}" y1="0" x2="{{xx}}" y2="1024" style="stroke:black;stroke-width:2" />
+        {% endfor %}  
+
+          <!-- Derefter de horizontale -->
+
+        {% for i in 1..21 %}
+          {% set yy = (i * 32) %}   
+          <line x1="0" y1="{{yy}}" x2="704" y2="{{yy}}" style="stroke:black;stroke-width:2" />
+        {% endfor %}  
+
+        
+          <!-- Endelig kommer teksten --->
+
+        {% for i in tekst %}
+          {% set yy = (loop.index0 * 32) + 26 %}
+
+          <text x="6", y="{{yy}}" fill="black">{{i}}</text>
+        {% endfor %}
+     
     </svg>
   </div>
 
