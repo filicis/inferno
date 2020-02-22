@@ -1,0 +1,24 @@
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AfsnitsindstillingerController!{% endblock %}
+
+{% block body %}
+
+
+  <div class="container-md">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title alert alert-success text-center">Afsnitshåndtering </h3>
+	    {% for afs in afsnit %}
+        <li>{{ afs.sks }} - {{ afs.navn }} - {{ afs.oprettet.date }} </li>
+        
+   {% endfor %}
+            <a href="#" class="card-link">Ny</a>
+    <a href="#" class="card-link">Hjælp</a>
+        
+
+      </div>
+    </div> 
+  </div>
+
+{% endblock %}

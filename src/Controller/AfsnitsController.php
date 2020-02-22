@@ -7,7 +7,7 @@
 //						Tillade indl'ggelser og udskrivelser
 //						Kunne tildele sengepladser
 //
-//						Kunne vide et udskriftsvenligt billede med noter pÅ samtlige indlagte
+//						Kunne vide et udskriftsvenligt billede med noter pÃ… samtlige indlagte
 //
 
 namespace App\Controller;
@@ -51,10 +51,10 @@ class AfsnitsController extends AbstractController
     										'Card:'=> 'Test4',
     										'Gas:' => 'Test5',
     										'Ren' => 'Test6',
-    										'Inf:' => 'Infektionsmæssig status',
-    										'Hæm:' => 'Infektionsmæssig status',
+    										'Inf:' => 'InfektionsmÃ¦ssig status',
+    										'HÃ¦m:' => 'InfektionsmÃ¦ssig status',
     										'Endo:' => 'Test7',
-    										'Væske:' => 'Væskestatus',
+    										'VÃ¦ske:' => 'VÃ¦skestatus',
     										'Andet:' => 'Andre problemstillinger',
     										'Plan:' => 'Plan for kommende vagtperiode' );
 

@@ -14,9 +14,10 @@
 
 
   <div class="container">
-		<p>
-			<h1>Brugerregistrering</h1>
-		</p>
+    <div class="card">
+      <div class="card-body">
+	    <h1 class="card-title alert alert-success text-center">Brugerregistrering</h1>
+
 
 		{{ form_start(form) }}
 
@@ -29,6 +30,8 @@
     	<button type="submit">Register!</button>
 		{{ form_end(form) }}
 
-	</div>
+      </div>
+    </div>
+  </div>
 
 {% endblock %}

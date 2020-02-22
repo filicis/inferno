@@ -14,25 +14,20 @@
 {% block title %}Hello BrugereController!{% endblock %}
 
 {% block body %}
-<style>
-    .example-wrapper { margin: 1em auto; max-width: 800px; width: 95%; font: 18px/1.5 sans-serif; }
-    .example-wrapper code { background: #F5F5F5; padding: 2px 6px; }
-</style>
 
-<div class="example-wrapper">
-    <h1>Hello {{ controller_name }}! ✅</h1>
-
-    This friendly message is coming from:
-    <ul>
-        <li>Your controller at <code><a href="{{ '/home/michael/php/inferno/src/Controller/BrugereController.php'|file_link(0) }}">src/Controller/BrugereController.php</a></code></li>
-        <li>Your template at <code><a href="{{ '/home/michael/php/inferno/templates/brugere/index.html.twig'|file_link(0) }}">templates/brugere/index.html.twig</a></code></li>
-    </ul>
-</div>
-
-	<div class="container">
+  <div class="container">
+    <div class="card max-width=800px">
+      <div class=card-body>
+      <h3 class="card-title alert alert-success text-center">Brugerhåndtering</h3>
 	    {% for user in brugere %}
         <li>{{ user.username|e }} - {{ user.navn }} - {{ user.email }} - {{ user.oprettet.date }} - {{ user.isActive }}</li>
     {% endfor %}
+    
+                <a href="{{ path('brugerregistrering') }}" class="card-link">Ny</a>
+    <a href="#" class="card-link">Hjælp</a>
+ 
 
+      </div>
 	</div>
+  </div>
 {% endblock %}

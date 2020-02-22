@@ -49,11 +49,9 @@
           <div class="navbar-nav mr-auto">
             <a class="nav-item nav-link" href="{{ path('ita_document') }}">Hello Page</a>
             <a class="nav-item nav-link" href="{{ path('afsnit') }}">Afsnit</a>
-            <a class="nav-item nav-link" href="{{ path('brugerregistrering') }}">Brugerregistrering</a>
             <a class="nav-item nav-link" href="{{ path('ny_note') }}">Ny note</a>
             <a class="nav-item nav-link" href="{{ path('patient') }}">Ny patient</a>
             <a class="nav-item nav-link" href="{{ path('selectafsnit') }}">Vælg Afsnit</a>
-            <a class="nav-item nav-link" href="{{ path('hospitaler') }}">Hospitaler</a>
 		    		<a class="nav-item nav-link" href="{{ path('udprint') }}">Print</a>
 
 							<!-- Dropdown menuen 'Indstillinger' -->
@@ -68,7 +66,7 @@
 		    		     aria-expanded="false">Indstillinger</a>
 		    		  <div class="dropdown-menu" aria-labelledby="navbarDropdown">
             		<a class="dropdown-item" href="{{path('brugere')}}">Brugere</a>
-            		<a class="dropdown-item" href="#">Afsnit</a>
+            		<a class="dropdown-item" href="{{ path('afsnitsindstillinger') }}">Afsnit</a>
             		<div class="dropdown-divider"></div>
             		<a class="dropdown-item" href="#">Ikke Implementeret</a>
 		    		  </div>
