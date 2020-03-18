@@ -23,26 +23,26 @@
     <svg width="2948" height="1280">
       <title>Bid af Postop Observationsskema</title>
         
-        <rect width="704" height="32" stroke-width="0" style="fill:dodgerblue"></rect>
+        <rect width="704" height="32" stroke-width="0" style="fill:rgb(205,205,255)"></rect>
         
                <!-- Så de vertikale blå streger -->
 
         {% for i in 13..43 %}
           {% set xx = (i * 16) %}   
-          <line x1="{{xx}}" y1="670" x2="{{xx}}" y2="1024" style="stroke:dodgerblue;stroke-width:2" />
+          <line x1="{{xx}}" y1="670" x2="{{xx}}" y2="1024" style="stroke:rgb(205,205,255);stroke-width:2" />
         {% endfor %} 
         
           <!-- Derefter de horizontale blå streger -->
 
         {% for i in 43..63 %}
           {% set yy = (i * 16) %}   
-          <line x1="192" y1="{{yy}}" x2="704" y2="{{yy}}" style="stroke:dodgerblue;stroke-width:2" />
+          <line x1="192" y1="{{yy}}" x2="704" y2="{{yy}}" style="stroke:rgb(205,205,255);stroke-width:2" />
         {% endfor %}  
    
         
           <!-- Så definerer vi vores boks med rammer -->
         
-        <rect width="704" height="1024" stroke-width="4" style="fill:blue;stroke:black;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9"> </rect>
+        <rect width="704" height="1024" stroke-width="4" style="fill:none;stroke:black;stroke-width:5;fill-opacity:0.1;stroke-opacity:0.9"> </rect>
 
           <!-- Så kommer de 8 vertikale streger -->
 

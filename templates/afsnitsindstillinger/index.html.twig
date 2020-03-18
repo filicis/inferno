@@ -1,6 +1,13 @@
+{#
+		Afsnitsindstillinger
+
+		- Opsætter et givet afsnit
+#}
+
+
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AfsnitsindstillingerController!{% endblock %}
+{% block title %}Inferno: Afsnit{% endblock %}
 
 {% block body %}
 
@@ -8,17 +15,31 @@
   <div class="container-md">
     <div class="card">
       <div class="card-body">
-        <h3 class="card-title alert alert-success text-center">Afsnitshåndtering </h3>
-	    {% for afs in afsnit %}
-        <li>{{ afs.sks }} - {{ afs.navn }} - {{ afs.oprettet.date }} </li>
-        
-   {% endfor %}
-            <a href="#" class="card-link">Ny</a>
-    <a href="#" class="card-link">Hjælp</a>
-        
-
+        <h3 class="card-title alert alert-success text-center">Opsætning af Afsnit </h3>
+        <table class='table table-sm'>
+          <thead>
+            <tr>
+              <th scope='col'>SKS</th>
+              <th scope='col'>Navn</th>
+              <th scope='col'>Oprettet</th>
+            </tr>
+          </thead>
+          <tbody style='height:100px'>
+	    	    {% for afs in afsnit %}
+            <a href="#">
+	    	      <tr>
+	    	        <td>{{ afs.sks }}</td>
+	    	        <td>{{ afs.navn }}</td>
+	    	        <td>{{ afs.oprettet.date|date('d-m-Y') }}</td>
+	    	      </tr>
+	    	      </a>
+   			    {% endfor %}
+   			  </tbody>
+   			</table>
+        <a href="#" class="card-link">Nyt</a>
+        <a href="#" class="card-link">Hjælp</a>
       </div>
-    </div> 
+    </div>
   </div>
 
 {% endblock %}

@@ -10,6 +10,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Afsnit;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -22,11 +24,21 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 
 class SelectAfsnitController extends AbstractController
 {
+
 	/**
-	* @Route("/itadoc/afsnit", name="selectafsnit")
-	*/
+	 *
+	 * @Route("/itadoc/afsnit", name="selectafsnit")
+	 *
+	 **/
 	public function index(Request $request, SessionInterface $session)
 	{
+    $afsnitsliste= $this->getDoctrine()
+		  ->getRepository(Afsnit::class)
+		  ->findAll();
+
+
+
+
 		$afsnit=   array ('sks001' => 'Intensiv Afsnit Andeby',
 		'sks002' => 'Intensiv Afsnit Korsbæk',
 		'sks003' => 'Intensive Senge RHE',
@@ -52,6 +64,7 @@ class SelectAfsnitController extends AbstractController
 		return $this->render('select_afsnit/index.html.twig', [
 		'controller_name' => 'SelectAfsnitController',
 		'afsnit' => $afsnit,
+		'afsnitsliste' =>$afsnitsliste,
 		'our_form' => $form,
 		'our_form' => $form->createView(),
 		]);

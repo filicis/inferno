@@ -4,7 +4,7 @@
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello SelectAfsnitController!{% endblock %}
+{% block title %}Inferno: Vælg afsnit{% endblock %}
 
 {% block body %}
 
@@ -16,17 +16,15 @@
       <div class="card-header alert alert-success">Vælg afsnit</div>
       <div class="card-body">
         <h5 class="card-title">Vælg afsnit</h5>
-        {% for key,item in afsnit %}
+        {% for afs in afsnitsliste %}
           <div class"form-check>
-          <input class="form-check-input" type="radio" value="{{ key }}" id="{{ key }}" name="sks">
-  				<label class="form-check-label" for="{{ key }}">
-    					{{ item }}
+          <input class="form-check-input" type="radio" value="{{ afs.sks }}" id="{{ afs.sks }}" name="sks">
+  				<label class="form-check-label" for="{{ afs.sks }}">
+    					{{ afs.navn }}
   				</label>
   				</div>
   			{% endfor %}
   		<p></p>
-      <button type="button" class="btn btn-primary">Primary</button>
-      <button type="button" class="btn btn-primary">Primary</button>
       {{form_rest(our_form)}}
       {{form_end(our_form)}}
 

@@ -1,0 +1,9 @@
+
+Inferno
+
+Starter op på velkomst siden.
+
+- Efter logon kommer brugeren direkte ind på relevante afsnitsoversigt med senge, patienter og anamnese -
+
+
+Dette afhængig af cookie og session object

@@ -1,14 +1,19 @@
+{#
+		Afsnit
+
+		- Oversigtsbillede over det aktuelle afsnit med senge, patienter og anamnese
+#}
 
 {% extends 'base.html.twig' %}
 
-{% block title %}Hello AfsnitsController!{% endblock %}
+{% block title %}Inferno: {% endblock %}
 
 {% block body %}
 
   <div class="container">
     <h1 class="text-center">Intensiv Afsnittet RHE</h1>
     <div class="row text-center">
-      <div class="col-md-3">
+      <div class="col-md-4">
 
         <h6 class="alert alert-success text-left">Patient Oversigt</h6>
 				<div class="nav nav-pills nav-fill flex-column bg-light">
@@ -21,7 +26,7 @@
         </div>
 
     	</div>
-    	<div class="col-md-9">
+    	<div class="col-md-8">
 			<h6 class="alert alert-info text-left">CPR: 011244-2048 - Navn: Tove Jensen - Afd: A1</h6>
     	<form class="row">
     	    {% for key,item in mydata %}
