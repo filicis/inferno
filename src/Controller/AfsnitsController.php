@@ -13,6 +13,8 @@
 
 namespace App\Controller;
 
+use App\Entity\Afsnit;
+
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
@@ -39,6 +41,15 @@ class AfsnitsController extends AbstractController
 
 		if ($sks == null)
 		  return $this->redirectToRoute('selectafsnit');
+
+    $afsnit= $this->getDoctrine()
+		  ->getRepository(Afsnit::class)
+		  ->findOneBy(['sks' => $sks]);
+
+    $nlayout= ["Anamnese", "CNS", "Pulm", "Card",];
+
+    $slayout= ["St 3-1", "St 3-2", "St 1-1", "St 1-2",];
+
 
 
 		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
@@ -74,6 +85,9 @@ class AfsnitsController extends AbstractController
 		'controller_name' => 'AfsnitsController',
 		'indlagte' => $pliste,
 		'mydata' => $teksten,
+		'afsnit' => $afsnit,
+		'nlayout' => $nlayout,
+		'slayout' => $slayout,
 		]);
 	}
 }

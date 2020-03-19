@@ -1,0 +1,41 @@
+{#
+		Afsnitsindstillinger
+
+		- Opsætter et givet afsnit
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Inferno: Afsnit{% endblock %}
+
+{% block body %}
+
+
+  <div class="container-md">
+    <div class="card">
+      <div class="card-body">
+        <h3 class="card-title alert alert-success text-center">Opsætning af Afsnit </h3>
+        <form class="row">
+          <label for="sks" >SKS:</label>
+          <input type="text" class="form-control" id="sks" value="{{afsnit.sks}}" aria-describedby="skshelp" required />
+          <label for="kortnavn" >Kort Navn:</label>
+          <input type="text" class="form-control" id="kortnavn" value="ITARHE" />
+          <label for="navn" >Navn:</label>
+          <input type="text" class="form-control" id="navn" value="{{afsnit.navn}}" />
+
+          <label for="sengelayout" >Senge Layout:</label>
+          <textarea class="form-control" id="sengelayout" inputstl rows="3">{{ slayout }}</textarea>
+
+          <label for="notelayout" >Note Layout:</label>
+          <textarea class="form-control" id="notelayout" inputstl rows="3">{{ nlayout }}</textarea>
+
+        <button class="btn btn-primary" type="submit">Submit form</button>
+
+        </form>
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}

@@ -49,6 +49,11 @@ class Afsnit
      */
     private $beds = [];
 
+    /**
+     * @ORM\Column(type="string", length=8)
+     */
+    private $kortnavn;
+
     public function __construct()
     {
         $this->users = new ArrayCollection();
@@ -141,6 +146,18 @@ class Afsnit
     public function setBeds(?array $beds): self
     {
         $this->beds = $beds;
+
+        return $this;
+    }
+
+    public function getKortnavn(): ?string
+    {
+        return $this->kortnavn;
+    }
+
+    public function setKortnavn(string $kortnavn): self
+    {
+        $this->kortnavn = $kortnavn;
 
         return $this;
     }
