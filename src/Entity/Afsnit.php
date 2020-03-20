@@ -50,9 +50,21 @@ class Afsnit
     private $beds = [];
 
     /**
+     * @ORM\Column(type="array", nullable=true)
+     */
+
+    private $notefelter= [];
+
+    /**
      * @ORM\Column(type="string", length=8)
      */
     private $kortnavn;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\Admisions", mappedBy="sks", cascade={"persist", "remove"})
+     */
+    private $admisions;
+
 
     public function __construct()
     {
@@ -161,4 +173,34 @@ class Afsnit
 
         return $this;
     }
+
+    public function getNotefelter(): ?array
+    {
+        return $this->notefelter == null ? ["Anamnese", "CNS",] : $this->notefelter;
+    }
+
+    public function setNotefelter(array $notefelter): self
+    {
+        $this->notefelter = $notefelter;
+
+        return $this;
+    }
+
+    public function getAdmisions(): ?Admisions
+    {
+        return $this->admisions;
+    }
+
+    public function setAdmisions(Admisions $admisions): self
+    {
+        $this->admisions = $admisions;
+
+        // set the owning side of the relation if necessary
+        if ($admisions->getSks() !== $this) {
+            $admisions->setSks($this);
+        }
+
+        return $this;
+    }
+
 }

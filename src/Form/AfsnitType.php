@@ -19,12 +19,14 @@ class AfsnitType extends AbstractType
   {
     $builder
     ->add('sks')
-    ->add('navn')
-    ->add('oprettet')
-    ->add('beds', TextType::class)
-    ->add('afdeling')
     ->add('kortnavn')
+    ->add('navn')
+    //->add('oprettet')
+    ->add('beds', TextType::class)
+    ->add('notefelter', TextType::class)
+    //->add('afdeling')
     ;
+
 
     $builder->get('beds')
       ->addModelTransformer(new CallbackTransformer(
@@ -35,6 +37,18 @@ class AfsnitType extends AbstractType
         function ($bedsAsString) {
           // transform the string back to an array
           return json_decode($bedsAsString);
+        }
+      ));
+
+    $builder->get('notefelter')
+      ->addModelTransformer(new CallbackTransformer(
+        function ($notefelterAsArray) {
+          // transform the array to a string
+          return json_encode($notefelterAsArray);
+        },
+        function ($notefelterAsString) {
+          // transform the string back to an array
+          return json_decode($notefelterAsString);
         }
       ));
 
