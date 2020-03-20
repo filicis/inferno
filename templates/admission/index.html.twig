@@ -1,0 +1,20 @@
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello AdmissionController!{% endblock %}
+
+{% block body %}
+
+  <div class="container-md">
+    <div class="card">
+      <div claass="card-body">
+        <h5 class="card-title alert alert-success text-center">Indlæg ny patient</h5>
+        {{ form_start(form) }}
+        {{ form_widget(form) }}
+        {{ form_end(form) }}
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
