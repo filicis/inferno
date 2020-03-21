@@ -51,6 +51,13 @@ class Admission
      */
     private $user;
 
+    public function __construct()
+    {
+        $this->active= true;
+        $this->admitted= new \DateTime();
+    }
+
+
     public function getId(): ?int
     {
         return $this->id;

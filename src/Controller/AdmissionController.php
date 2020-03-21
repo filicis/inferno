@@ -22,10 +22,25 @@ use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 
+//use Symfony\Component\Validator\Constraints\DateTime;
+
+
+use Symfony\Component\Security\Core\Security;
+
 
 
 class AdmissionController extends AbstractController
 {
+
+      private $security;
+
+    public function __construct(Security $security)
+    {
+        // Avoid calling getUser() in the constructor: auth may not
+        // be complete yet. Instead, store the entire Security object.
+        $this->security = $security;
+    }
+
 
   /**
   * @Route("/admission", name="admission")
@@ -59,8 +74,11 @@ class AdmissionController extends AbstractController
 
 
       $admission= new Admission();
-      $admission->setCpr($request->getSession()->get('dummy'));
-      $admission->setSks($request->getSession()->get('sks'));
+      $admission->setActive(true);
+      // $admission->setAdmitted(new DateTime());
+      $admission->setPatient($request->getSession()->get('dummy'));
+      $admission->setAfsnit($request->getSession()->get('afsnit'));
+      $admission->setUser($this->security->getUser());
 
       $entityManager->persist($admission);
       $entityManager->flush();
