@@ -4,6 +4,7 @@
 
 {% extends 'base.html.twig' %}
 
+
 {% block title %}Inferno: Vælg afsnit{% endblock %}
 
 {% block body %}
@@ -16,15 +17,15 @@
       <div class="card-header alert alert-success">Vælg afsnit</div>
       <div class="card-body">
         <h5 class="card-title">Vælg afsnit</h5>
-        {% for afs in afsnitsliste %}
+        {# % for afs in afsnitsliste % #}
+        {% for i in 0..(afsnitsliste|length - 1) %}
           <div class"form-check>
-          <input class="form-check-input" type="radio" value="{{ afs.sks }}" id="{{ afs.sks }}" name="sks">
-  				<label class="form-check-label" for="{{ afs.sks }}">
-    					{{ afs.navn }}
+          <input class="form-check-input" type="radio" value="{{ i }}" id="{{ i }}" name="index">
+  				<label class="form-check-label" for="{{ i }}">
+    					{{ afsnitsliste[i].navn }}
   				</label>
   				</div>
   			{% endfor %}
-  		<p></p>
       {{form_rest(our_form)}}
       {{form_end(our_form)}}
 

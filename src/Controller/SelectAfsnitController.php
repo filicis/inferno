@@ -37,35 +37,23 @@ class SelectAfsnitController extends AbstractController
 		  ->findAll();
 
 
-
-
-		$afsnit=   array ('sks001' => 'Intensiv Afsnit Andeby',
-		'sks002' => 'Intensiv Afsnit Korsbæk',
-		'sks003' => 'Intensive Senge RHE',
-		'sks004' => 'Intensive Senge RHL',
-		'sks005' => 'Intensiv Afsnit Gåseby',
-
-		);
-
-		$form = $this->createFormBuilder($afsnit)
-		->add('select', SubmitType::class , ['attr' => ['label' => 'Vælg']] )
+		$form = $this->createFormBuilder()
+		->add('select', SubmitType::class , ['label' => 'Vælg'] )
 		->getForm();
 
 		$form->handleRequest($request);
 
-		if ($form->isSubmitted() && $form->isValid()) {
+		if ($form->isSubmitted() && $form->isValid())
+		{
+      $afsnit= $afsnitsliste[$request->get('index')];
+		  $session->set("sks", $afsnit->getSks());
+			$session->set("afsnit", $afsnit);
 
-			// Gemmer brugeren valg i Session, og hopper videre til Afsnit
-
-			$session->set("sks", $request->request->get('sks'));
 			return $this->redirectToRoute('afsnit');
 		}
 
 		return $this->render('select_afsnit/index.html.twig', [
-		'controller_name' => 'SelectAfsnitController',
-		'afsnit' => $afsnit,
 		'afsnitsliste' =>$afsnitsliste,
-		'our_form' => $form,
 		'our_form' => $form->createView(),
 		]);
 	}

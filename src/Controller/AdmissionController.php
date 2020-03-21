@@ -1,8 +1,19 @@
 <?php
 
+
+/**
+*	  AdmissionController
+*
+*
+*
+*
+**/
+
+
 namespace App\Controller;
 
 use App\Entity\Patient;
+use App\Entity\Admisions;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -40,12 +51,23 @@ class AdmissionController extends AbstractController
 		  ->getRepository(Patient::class)
 		  ->findOneBy(['cpr' => $value, ]);
 
-		  if ($patient != null)
+		  $request->getSession()->set('dummy', $patient);
+
+		  if ($patient == null)
 		  {
 		    return $this->redirectToRoute('afsnit');
 		  }
+		  $entityManager = $this->getDoctrine()->getManager();
 
 
+      $admission= new Admisions();
+      $admission->setCpr($request->getSession()->get('dummy'));
+      $admission->setSks($request->getSession()->get('sks'));
+
+      $entityManager->persist($admission);
+      $entityManager->flush($request->getSession()->get('sks'));
+
+		  return $this->redirectToRoute('afsnit');
 
     }
 
