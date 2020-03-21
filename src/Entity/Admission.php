@@ -5,9 +5,10 @@ namespace App\Entity;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
- * @ORM\Entity(repositoryClass="App\Repository\AdmisionsRepository")
+ * @ORM\Entity(repositoryClass="App\Repository\AdmissionRepository")
  */
-class Admisions
+
+class Admission
 {
     /**
      * @ORM\Id()
@@ -17,13 +18,13 @@ class Admisions
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Patient", inversedBy="admisions", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Patient", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $cpr;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Afsnit", inversedBy="admisions", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $sks;
@@ -42,6 +43,17 @@ class Admisions
      * @ORM\Column(type="datetime", nullable=true)
      */
     private $discharged;
+
+    /**
+     * @ORM\Column(type="datetime")
+     */
+    private $admitted;
+
+    /**
+     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $user;
 
     public function getId(): ?int
     {
@@ -72,18 +84,6 @@ class Admisions
         return $this;
     }
 
-    public function getAdmission(): ?\DateTimeInterface
-    {
-        return $this->admission;
-    }
-
-    public function setAdmission(\DateTimeInterface $admission): self
-    {
-        $this->admission = $admission;
-
-        return $this;
-    }
-
     public function getActive(): ?bool
     {
         return $this->active;
@@ -104,6 +104,30 @@ class Admisions
     public function setDischarged(?\DateTimeInterface $discharged): self
     {
         $this->discharged = $discharged;
+
+        return $this;
+    }
+
+    public function getAdmitted(): ?\DateTimeInterface
+    {
+        return $this->admitted;
+    }
+
+    public function setAdmitted(\DateTimeInterface $admitted): self
+    {
+        $this->admitted = $admitted;
+
+        return $this;
+    }
+
+    public function getUser(): ?User
+    {
+        return $this->user;
+    }
+
+    public function setUser(User $user): self
+    {
+        $this->user = $user;
 
         return $this;
     }

@@ -2,25 +2,25 @@
 
 namespace App\Repository;
 
-use App\Entity\Admisions;
+use App\Entity\Admission;
 use Doctrine\Bundle\DoctrineBundle\Repository\ServiceEntityRepository;
 use Doctrine\Common\Persistence\ManagerRegistry;
 
 /**
- * @method Admisions|null find($id, $lockMode = null, $lockVersion = null)
- * @method Admisions|null findOneBy(array $criteria, array $orderBy = null)
- * @method Admisions[]    findAll()
- * @method Admisions[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
+ * @method Admission|null find($id, $lockMode = null, $lockVersion = null)
+ * @method Admission|null findOneBy(array $criteria, array $orderBy = null)
+ * @method Admission[]    findAll()
+ * @method Admission[]    findBy(array $criteria, array $orderBy = null, $limit = null, $offset = null)
  */
-class AdmisionsRepository extends ServiceEntityRepository
+class AdmissionRepository extends ServiceEntityRepository
 {
     public function __construct(ManagerRegistry $registry)
     {
-        parent::__construct($registry, Admisions::class);
+        parent::__construct($registry, Admission::class);
     }
 
     // /**
-    //  * @return Admisions[] Returns an array of Admisions objects
+    //  * @return Admission[] Returns an array of Admission objects
     //  */
     /*
     public function findByExampleField($value)
@@ -37,7 +37,7 @@ class AdmisionsRepository extends ServiceEntityRepository
     */
 
     /*
-    public function findOneBySomeField($value): ?Admisions
+    public function findOneBySomeField($value): ?Admission
     {
         return $this->createQueryBuilder('a')
             ->andWhere('a.exampleField = :val')

@@ -13,7 +13,7 @@
 namespace App\Controller;
 
 use App\Entity\Patient;
-use App\Entity\Admisions;
+use App\Entity\Admission;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -33,11 +33,9 @@ class AdmissionController extends AbstractController
 
   public function index(Request $request)
   {
-    $defaultData = ["message" => "Indtast data"];
-    $form= $this->createFormBuilder($defaultData)
+    $form= $this->createFormBuilder()
     ->add('cpr', TextType::class)
     ->add('send', SubmitType::class)
-
     ->getForm();
 
     $form->handleRequest($request);
@@ -60,12 +58,12 @@ class AdmissionController extends AbstractController
 		  $entityManager = $this->getDoctrine()->getManager();
 
 
-      $admission= new Admisions();
+      $admission= new Admission();
       $admission->setCpr($request->getSession()->get('dummy'));
       $admission->setSks($request->getSession()->get('sks'));
 
       $entityManager->persist($admission);
-      $entityManager->flush($request->getSession()->get('sks'));
+      $entityManager->flush();
 
 		  return $this->redirectToRoute('afsnit');
 

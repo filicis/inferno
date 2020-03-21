@@ -37,9 +37,9 @@ class Patient
     private $fornavne;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admisions", mappedBy="cpr", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="cpr", cascade={"persist", "remove"})
      */
-    private $admisions;
+    private $admission;
 
 
     public function getId(): ?int
@@ -90,18 +90,18 @@ class Patient
     	return $this->fornavne . " " . $this->efternavn;
     }
 
-    public function getAdmisions(): ?Admisions
+    public function getAdmission(): ?Admission
     {
-        return $this->admisions;
+        return $this->admission;
     }
 
-    public function setAdmisions(Admisions $admisions): self
+    public function setAdmission(Admission $admission): self
     {
-        $this->admisions = $admisions;
+        $this->admission = $admission;
 
         // set the owning side of the relation if necessary
-        if ($admisions->getCpr() !== $this) {
-            $admisions->setCpr($this);
+        if ($admission->getCpr() !== $this) {
+            $admission->setCpr($this);
         }
 
         return $this;

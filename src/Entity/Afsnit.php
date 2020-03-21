@@ -61,9 +61,9 @@ class Afsnit
     private $kortnavn;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admisions", mappedBy="sks", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="sks", cascade={"persist", "remove"})
      */
-    private $admisions;
+    private $admission;
 
 
     public function __construct()
@@ -186,18 +186,18 @@ class Afsnit
         return $this;
     }
 
-    public function getAdmisions(): ?Admisions
+    public function getAdmission(): ?Admission
     {
-        return $this->admisions;
+        return $this->admission;
     }
 
-    public function setAdmisions(Admisions $admisions): self
+    public function setAdmission(Admission $admission): self
     {
-        $this->admisions = $admisions;
+        $this->admission = $admission;
 
         // set the owning side of the relation if necessary
-        if ($admisions->getSks() !== $this) {
-            $admisions->setSks($this);
+        if ($admission->getSks() !== $this) {
+            $admission->setSks($this);
         }
 
         return $this;
