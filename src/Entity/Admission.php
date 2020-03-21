@@ -21,18 +21,14 @@ class Admission
      * @ORM\OneToOne(targetEntity="App\Entity\Patient", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $cpr;
+    private $patient;
 
     /**
      * @ORM\OneToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
-    private $sks;
+    private $afsnit;
 
-    /**
-     * @ORM\Column(type="datetime")
-     */
-    private $admission;
 
     /**
      * @ORM\Column(type="boolean")
@@ -60,26 +56,26 @@ class Admission
         return $this->id;
     }
 
-    public function getCpr(): ?Patient
+    public function getPatient(): ?Patient
     {
-        return $this->cpr;
+        return $this->patient;
     }
 
-    public function setCpr(Patient $cpr): self
+    public function setPatient(Patient $patient): self
     {
-        $this->cpr = $cpr;
+        $this->patient = $patient;
 
         return $this;
     }
 
-    public function getSks(): ?Afsnit
+    public function getAfsnit(): ?Afsnit
     {
-        return $this->sks;
+        return $this->afsnit;
     }
 
-    public function setSks(Afsnit $sks): self
+    public function setAfsnit(Afsnit $afsnit): self
     {
-        $this->sks = $sks;
+        $this->afsnit = $afsnit;
 
         return $this;
     }

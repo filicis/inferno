@@ -37,7 +37,7 @@ class Patient
     private $fornavne;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="cpr", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="patient", cascade={"persist", "remove"})
      */
     private $admission;
 
@@ -100,8 +100,8 @@ class Patient
         $this->admission = $admission;
 
         // set the owning side of the relation if necessary
-        if ($admission->getCpr() !== $this) {
-            $admission->setCpr($this);
+        if ($admission->getPatient() !== $this) {
+            $admission->setPatient($this);
         }
 
         return $this;

@@ -61,7 +61,7 @@ class Afsnit
     private $kortnavn;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="sks", cascade={"persist", "remove"})
+     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="afsnit", cascade={"persist", "remove"})
      */
     private $admission;
 
@@ -196,8 +196,8 @@ class Afsnit
         $this->admission = $admission;
 
         // set the owning side of the relation if necessary
-        if ($admission->getSks() !== $this) {
-            $admission->setSks($this);
+        if ($admission->getAfsnit() !== $this) {
+            $admission->setAfsnit($this);
         }
 
         return $this;
