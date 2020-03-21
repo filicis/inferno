@@ -18,13 +18,13 @@ class Admission
     private $id;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Patient", inversedBy="admission", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="admission")
      * @ORM\JoinColumn(nullable=false)
      */
     private $patient;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission")
      * @ORM\JoinColumn(nullable=false)
      */
     private $afsnit;
@@ -46,10 +46,12 @@ class Admission
     private $admitted;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\User", cascade={"persist", "remove"})
+     * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
+
 
     public function __construct()
     {
@@ -128,10 +130,13 @@ class Admission
         return $this->user;
     }
 
-    public function setUser(User $user): self
+    public function setUser(?User $user): self
     {
         $this->user = $user;
 
         return $this;
     }
+
+
+
 }
