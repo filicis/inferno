@@ -48,11 +48,6 @@ class SelectAfsnitController extends AbstractController
       $afsnit= $afsnitsliste[$request->get('index')];
 		  $session->set("sks", $afsnit->getSks());
 
-		  $afsnit1= $this->getDoctrine()
-		  ->getRepository(Afsnit::class)
-		  ->findOneBy(['sks' => $afsnit->getSks()]);
-			$session->set("afsnit", $afsnit1);
-
 			return $this->redirectToRoute('afsnit');
 		}
 

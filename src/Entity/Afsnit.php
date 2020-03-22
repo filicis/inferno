@@ -51,9 +51,15 @@ class Afsnit
     private $kortnavn;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="afsnit", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Admission", mappedBy="afsnit", orphanRemoval=true)
      */
-    private $admission;
+    private $admissions;
+
+    public function __construct()
+    {
+        $this->admissions = new ArrayCollection();
+    }
+
 
 
 
@@ -134,21 +140,36 @@ class Afsnit
         return $this;
     }
 
-    public function getAdmission(): ?Admission
+    /**
+     * @return Collection|Admission[]
+     */
+    public function getAdmissions(): Collection
     {
-        return $this->admission;
+        return $this->admissions;
     }
 
-    public function setAdmission(Admission $admission): self
+    public function addAdmission(Admission $admission): self
     {
-        $this->admission = $admission;
-
-        // set the owning side of the relation if necessary
-        if ($admission->getAfsnit() !== $this) {
+        if (!$this->admissions->contains($admission)) {
+            $this->admissions[] = $admission;
             $admission->setAfsnit($this);
         }
 
         return $this;
     }
+
+    public function removeAdmission(Admission $admission): self
+    {
+        if ($this->admissions->contains($admission)) {
+            $this->admissions->removeElement($admission);
+            // set the owning side to null (unless already changed)
+            if ($admission->getAfsnit() === $this) {
+                $admission->setAfsnit(null);
+            }
+        }
+
+        return $this;
+    }
+
 
 }

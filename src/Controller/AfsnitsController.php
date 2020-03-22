@@ -37,17 +37,25 @@ class AfsnitsController extends AbstractController
 	 **/
 	public function index(Request $request)
 	{
-		$afsnit= $this->session->get('afsnit');
+		$sks= $this->session->get('sks');
 
-		if ($afsnit == null)
+		if ($sks == null)
 		  return $this->redirectToRoute('selectafsnit');
+
+    $afsnit= $this->getDoctrine()
+		  ->getRepository(Afsnit::class)
+		  ->findOneBy(['sks' => $sks]);
+
+
+    $admission= $afsnit->getAdmissions();
 
     $nlayout= ["Anamnese", "CNS", "Pulm", "Card",];
 
     $slayout= ["St 3-1", "St 3-2", "St 1-1", "St 1-2",];
 
 
-
+    if ($admission == null)
+    {
 		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
 		'St 3-2' => '123465-5194  Hans Larsen',
 		'St 1-1' => '',
@@ -60,6 +68,19 @@ class AfsnitsController extends AbstractController
 		'St 8'   => '',
 
 		);
+	}
+	else
+	{
+
+		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
+		'St 3-2' => '123465-5194  Hans Larsen',
+		'St 1-1' => $admission->count(),);
+
+		foreach ($admission as $value)
+		{
+      $pliste[]= $value->getPatient()->getCpr();
+		}
+	}
 
 		$teksten = array ('Anamnese:'=> 'Kort anamnese med baggrunden for opholdet',
 		'CNS:' => 'Test2',
@@ -83,6 +104,7 @@ class AfsnitsController extends AbstractController
 		'afsnit' => $afsnit,
 		'nlayout' => $nlayout,
 		'slayout' => $slayout,
+		'admission' => $admission,
 		]);
 	}
 }

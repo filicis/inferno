@@ -67,7 +67,7 @@ class AdmissionController extends AbstractController
 
       $afsnit= $this->getDoctrine()
 		  ->getRepository(Afsnit::class)
-		  ->findOneBy(['sks' => $request->getSession()->get('afsnit')->getSks() ]);
+		  ->findOneBy(['sks' => $request->getSession()->get('sks')]);
 
 		  $request->getSession()->set('dummy', $patient);
 

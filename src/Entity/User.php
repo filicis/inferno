@@ -249,33 +249,7 @@ class User implements UserInterface, \Serializable
         ) = unserialize($serialized);
     }
 
-    /**
-     * @return Collection|Afsnit[]
-     */
-    public function getAfsnits(): Collection
-    {
-        return $this->afsnits;
-    }
 
-    public function addAfsnit(Afsnit $afsnit): self
-    {
-        if (!$this->afsnits->contains($afsnit)) {
-            $this->afsnits[] = $afsnit;
-            $afsnit->addUser($this);
-        }
-
-        return $this;
-    }
-
-    public function removeAfsnit(Afsnit $afsnit): self
-    {
-        if ($this->afsnits->contains($afsnit)) {
-            $this->afsnits->removeElement($afsnit);
-            $afsnit->removeUser($this);
-        }
-
-        return $this;
-    }
 
 
 }

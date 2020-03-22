@@ -17,17 +17,6 @@ class Admission
      */
     private $id;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="admission", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $patient;
-
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission", cascade={"persist", "remove"})
-     * @ORM\JoinColumn(nullable=false)
-     */
-    private $afsnit;
 
 
     /**
@@ -46,10 +35,23 @@ class Admission
     private $admitted;
 
     /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="admissions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $patient;
+
+    /**
+     * @ORM\ManyToOne(targetEntity="App\Entity\Afsnit", inversedBy="admissions")
+     * @ORM\JoinColumn(nullable=false)
+     */
+    private $afsnit;
+
+    /**
      * @ORM\ManyToOne(targetEntity="App\Entity\User")
      * @ORM\JoinColumn(nullable=false)
      */
     private $user;
+
 
 
 
@@ -65,29 +67,6 @@ class Admission
         return $this->id;
     }
 
-    public function getPatient(): ?Patient
-    {
-        return $this->patient;
-    }
-
-    public function setPatient(Patient $patient): self
-    {
-        $this->patient = $patient;
-
-        return $this;
-    }
-
-    public function getAfsnit(): ?Afsnit
-    {
-        return $this->afsnit;
-    }
-
-    public function setAfsnit(Afsnit $afsnit): self
-    {
-        $this->afsnit = $afsnit;
-
-        return $this;
-    }
 
     public function getActive(): ?bool
     {
@@ -125,6 +104,30 @@ class Admission
         return $this;
     }
 
+    public function getPatient(): ?Patient
+    {
+        return $this->patient;
+    }
+
+    public function setPatient(?Patient $patient): self
+    {
+        $this->patient = $patient;
+
+        return $this;
+    }
+
+    public function getAfsnit(): ?Afsnit
+    {
+        return $this->afsnit;
+    }
+
+    public function setAfsnit(?Afsnit $afsnit): self
+    {
+        $this->afsnit = $afsnit;
+
+        return $this;
+    }
+
     public function getUser(): ?User
     {
         return $this->user;
@@ -136,6 +139,7 @@ class Admission
 
         return $this;
     }
+
 
 
 

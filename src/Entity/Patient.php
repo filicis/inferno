@@ -7,6 +7,8 @@
 
 namespace App\Entity;
 
+use Doctrine\Common\Collections\ArrayCollection;
+use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
 /**
@@ -37,9 +39,15 @@ class Patient
     private $fornavne;
 
     /**
-     * @ORM\OneToOne(targetEntity="App\Entity\Admission", mappedBy="patient", cascade={"persist", "remove"})
+     * @ORM\OneToMany(targetEntity="App\Entity\Admission", mappedBy="patient", orphanRemoval=true)
      */
-    private $admission;
+    private $admissions;
+
+    public function __construct()
+    {
+        $this->admissions = new ArrayCollection();
+    }
+
 
 
     public function getId(): ?int
@@ -90,21 +98,76 @@ class Patient
     	return $this->fornavne . " " . $this->efternavn;
     }
 
-    public function getAdmission(): ?Admission
+    /**
+     * @return Collection|Admission[]
+     */
+    public function getAdmissions(): Collection
     {
-        return $this->admission;
+        return $this->admissions;
     }
 
-    public function setAdmission(Admission $admission): self
+    public function addAdmission(Admission $admission): self
     {
-        $this->admission = $admission;
-
-        // set the owning side of the relation if necessary
-        if ($admission->getPatient() !== $this) {
+        if (!$this->admissions->contains($admission)) {
+            $this->admissions[] = $admission;
             $admission->setPatient($this);
         }
 
         return $this;
     }
+
+    public function removeAdmission(Admission $admission): self
+    {
+        if ($this->admissions->contains($admission)) {
+            $this->admissions->removeElement($admission);
+            // set the owning side to null (unless already changed)
+            if ($admission->getPatient() === $this) {
+                $admission->setPatient(null);
+            }
+        }
+
+        return $this;
+    }
+
+
+    /**
+     *  isValid
+     *
+     *  checker validiteten af det aktuelle CPR-nummer
+     *
+     *  - Skal være på 10 karakterer, som alle skal være tal.
+     *  -
+     *  - Checker ** IKKE ** for gyldig fødselsdato !!
+
+
+    public function isValid(): boolean
+    {
+      $y= array(4, 3, 2, 7, 6, 5, 4, 3, 2, 1);
+      $cpr= $this->getCpr();
+
+      if strlen($cpr) == 10 && ctype_digit($cpr))
+      {
+        $x= 0;
+
+        for($i= 0; $i< 10; $++)
+        {
+          $x+= ($cpr[$i] - 48) * $y[$i];
+        }
+        return ($x / 11) == 0;
+
+      }
+      return false;
+    }
+
+
+    public function getCprN(): ? String
+    {
+      $cpr= this->getCpr();
+
+      return substr($cpr, 0, 6 ) . "-" . substr($cpr, 7);
+
+    }
+
+    **/
 
 }
