@@ -14,6 +14,7 @@ namespace App\Controller;
 
 use App\Entity\Patient;
 use App\Entity\Admission;
+use App\Entity\Afsnit;
 
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
@@ -64,6 +65,10 @@ class AdmissionController extends AbstractController
 		  ->getRepository(Patient::class)
 		  ->findOneBy(['cpr' => $value, ]);
 
+      $afsnit= $this->getDoctrine()
+		  ->getRepository(Afsnit::class)
+		  ->findOneBy(['sks' => $request->getSession()->get('afsnit')->getSks() ]);
+
 		  $request->getSession()->set('dummy', $patient);
 
 		  if ($patient == null)
@@ -77,7 +82,7 @@ class AdmissionController extends AbstractController
       $admission->setActive(true);
       // $admission->setAdmitted(new DateTime());
       $admission->setPatient($request->getSession()->get('dummy'));
-      $admission->setAfsnit($request->getSession()->get('afsnit'));
+      $admission->setAfsnit($afsnit);
       $admission->setUser($this->security->getUser());
 
       $entityManager->persist($admission);

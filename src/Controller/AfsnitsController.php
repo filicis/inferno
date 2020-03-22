@@ -37,14 +37,10 @@ class AfsnitsController extends AbstractController
 	 **/
 	public function index(Request $request)
 	{
-		$sks= $this->session->get('sks');
+		$afsnit= $this->session->get('afsnit');
 
-		if ($sks == null)
+		if ($afsnit == null)
 		  return $this->redirectToRoute('selectafsnit');
-
-    $afsnit= $this->getDoctrine()
-		  ->getRepository(Afsnit::class)
-		  ->findOneBy(['sks' => $sks]);
 
     $nlayout= ["Anamnese", "CNS", "Pulm", "Card",];
 
@@ -82,7 +78,6 @@ class AfsnitsController extends AbstractController
 
 
 		return $this->render('afsnits/index.html.twig', [
-		'controller_name' => 'AfsnitsController',
 		'indlagte' => $pliste,
 		'mydata' => $teksten,
 		'afsnit' => $afsnit,

@@ -19,7 +19,7 @@ class Afsnit
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=7)
+     * @ORM\Column(type="string", length=7, unique=true)
      */
     private $sks;
 
@@ -28,16 +28,6 @@ class Afsnit
      */
     private $navn;
 
-    /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Afdeling", inversedBy="afsnits")
-     * @ORM\JoinColumn(nullable=true)
-     */
-    private $afdeling;
-
-    /**
-     * @ORM\ManyToMany(targetEntity="App\Entity\User", inversedBy="afsnits")
-     */
-    private $users;
 
     /**
      * @ORM\Column(type="date")
@@ -66,10 +56,6 @@ class Afsnit
     private $admission;
 
 
-    public function __construct()
-    {
-        $this->users = new ArrayCollection();
-    }
 
     public function getId()
     {
@@ -96,44 +82,6 @@ class Afsnit
     public function setNavn(string $navn): self
     {
         $this->navn = $navn;
-
-        return $this;
-    }
-
-    public function getAfdeling(): ?Afdeling
-    {
-        return $this->afdeling;
-    }
-
-    public function setAfdeling(?Afdeling $afdeling): self
-    {
-        $this->afdeling = $afdeling;
-
-        return $this;
-    }
-
-    /**
-     * @return Collection|User[]
-     */
-    public function getUsers(): Collection
-    {
-        return $this->users;
-    }
-
-    public function addUser(User $user): self
-    {
-        if (!$this->users->contains($user)) {
-            $this->users[] = $user;
-        }
-
-        return $this;
-    }
-
-    public function removeUser(User $user): self
-    {
-        if ($this->users->contains($user)) {
-            $this->users->removeElement($user);
-        }
 
         return $this;
     }

@@ -22,7 +22,7 @@ class Patient
     private $id;
 
     /**
-     * @ORM\Column(type="string", length=10)
+     * @ORM\Column(type="string", length=10, unique=true)
      */
     private $cpr;
 

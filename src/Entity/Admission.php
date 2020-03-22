@@ -18,13 +18,13 @@ class Admission
     private $id;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="admission")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $patient;
 
     /**
-     * @ORM\ManyToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Afsnit", inversedBy="admission", cascade={"persist", "remove"})
      * @ORM\JoinColumn(nullable=false)
      */
     private $afsnit;
