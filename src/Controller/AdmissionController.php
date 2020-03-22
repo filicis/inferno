@@ -22,6 +22,7 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
+use Symfony\Component\Form\Extension\Core\Type\ResetType;
 
 //use Symfony\Component\Validator\Constraints\DateTime;
 
@@ -33,14 +34,14 @@ use Symfony\Component\Security\Core\Security;
 class AdmissionController extends AbstractController
 {
 
-      private $security;
+  private $security;
 
-    public function __construct(Security $security)
-    {
-        // Avoid calling getUser() in the constructor: auth may not
-        // be complete yet. Instead, store the entire Security object.
-        $this->security = $security;
-    }
+  public function __construct(Security $security)
+  {
+    // Avoid calling getUser() in the constructor: auth may not
+    // be complete yet. Instead, store the entire Security object.
+    $this->security = $security;
+  }
 
 
   /**
@@ -49,33 +50,35 @@ class AdmissionController extends AbstractController
 
   public function index(Request $request)
   {
+    $cpr= $request->get('cpr');
+
+
     $form= $this->createFormBuilder()
     ->add('cpr', TextType::class)
-    ->add('send', SubmitType::class)
+    ->add('Send', SubmitType::class)
     ->getForm();
 
     $form->handleRequest($request);
 
     if ($form->isSubmitted() && $form->isValid()) {
-      // data is an array with "name", "email", and "message" keys
       $data = $form->getData();
       $value= $data['cpr'];
 
       $patient= $this->getDoctrine()
-		  ->getRepository(Patient::class)
-		  ->findOneBy(['cpr' => $value, ]);
+      ->getRepository(Patient::class)
+      ->findOneBy(['cpr' => $value, ]);
 
       $afsnit= $this->getDoctrine()
-		  ->getRepository(Afsnit::class)
-		  ->findOneBy(['sks' => $request->getSession()->get('sks')]);
+      ->getRepository(Afsnit::class)
+      ->findOneBy(['sks' => $request->getSession()->get('sks')]);
 
-		  $request->getSession()->set('dummy', $patient);
+      $request->getSession()->set('dummy', $patient);
 
-		  if ($patient == null)
-		  {
-		    return $this->redirectToRoute('afsnit');
-		  }
-		  $entityManager = $this->getDoctrine()->getManager();
+      if ($patient == null)
+      {
+        return $this->redirectToRoute('afsnit');
+      }
+      $entityManager = $this->getDoctrine()->getManager();
 
 
       $admission= new Admission();
@@ -88,7 +91,7 @@ class AdmissionController extends AbstractController
       $entityManager->persist($admission);
       $entityManager->flush();
 
-		  return $this->redirectToRoute('afsnit');
+      return $this->redirectToRoute('afsnit');
 
     }
 

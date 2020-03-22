@@ -74,11 +74,11 @@ class AfsnitsController extends AbstractController
 
 		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
 		'St 3-2' => '123465-5194  Hans Larsen',
-		'St 1-1' => $admission->count(),);
+		'St 1-1' => '111111-1818  Nis Nissen');
 
 		foreach ($admission as $value)
 		{
-      $pliste[]= $value->getPatient()->getCpr();
+      $pliste[]= $value->getPatient()->getCprN() . " - " . $value->getPatient()->getNavn();
 		}
 	}
 

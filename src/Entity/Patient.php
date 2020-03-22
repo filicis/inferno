@@ -11,6 +11,9 @@ use Doctrine\Common\Collections\ArrayCollection;
 use Doctrine\Common\Collections\Collection;
 use Doctrine\ORM\Mapping as ORM;
 
+use Symfony\Component\Validator\Constraints as Assert;
+
+
 /**
  * @ORM\Entity(repositoryClass="App\Repository\PatientRepository")
  */
@@ -24,6 +27,7 @@ class Patient
     private $id;
 
     /**
+     * @Assert\NotBlank
      * @ORM\Column(type="string", length=10, unique=true)
      */
     private $cpr;
@@ -138,18 +142,18 @@ class Patient
      *  - Skal være på 10 karakterer, som alle skal være tal.
      *  -
      *  - Checker ** IKKE ** for gyldig fødselsdato !!
+     **/
 
-
-    public function isValid(): boolean
+    public function isValid(): ?bool
     {
       $y= array(4, 3, 2, 7, 6, 5, 4, 3, 2, 1);
       $cpr= $this->getCpr();
 
-      if strlen($cpr) == 10 && ctype_digit($cpr))
+      if (strlen($cpr) == 10 && ctype_digit($cpr))
       {
         $x= 0;
 
-        for($i= 0; $i< 10; $++)
+        for($i= 0; $i< 10; $i++)
         {
           $x+= ($cpr[$i] - 48) * $y[$i];
         }
@@ -162,12 +166,12 @@ class Patient
 
     public function getCprN(): ? String
     {
-      $cpr= this->getCpr();
+      $cpr= $this->getCpr();
 
-      return substr($cpr, 0, 6 ) . "-" . substr($cpr, 7);
+      return substr($cpr, 0, 6 ) . "-" . substr($cpr, 6);
 
     }
 
-    **/
+
 
 }
