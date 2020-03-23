@@ -52,6 +52,11 @@ class Admission
      */
     private $user;
 
+    /**
+     * @ORM\Column(type="string", length=8, nullable=true)
+     */
+    private $bed;
+
 
 
 
@@ -136,6 +141,18 @@ class Admission
     public function setUser(?User $user): self
     {
         $this->user = $user;
+
+        return $this;
+    }
+
+    public function getBed(): ?string
+    {
+        return $this->bed;
+    }
+
+    public function setBed(?string $bed): self
+    {
+        $this->bed = $bed;
 
         return $this;
     }
