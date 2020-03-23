@@ -76,7 +76,7 @@ class AfsnitsController extends AbstractController
 		'St 3-2' => '123465-5194  Hans Larsen',
 		'St 1-1' => '111111-1818  Nis Nissen',
 		'2.1' => 'Test1',
-		'2.2' => 'Test2',
+		'2.2' => null,
 		'2.3' => 'Test3',
 		);
 
