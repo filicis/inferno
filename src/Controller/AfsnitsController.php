@@ -1,15 +1,15 @@
 <?php
 
-	/**
-	 *
-	 * AfsnitsController
-   *
-	 * Skal:		Vise et oversigtsbillede over indlagte i afsnittet
-	 *					Tillade indlæggelser og udskrivelser
-	 *					Kunne tildele sengepladser
-   *
-	 *					Kunne vise et udskriftsvenligt billede med noter på samtlige indlagte
-	 **/
+/**
+*
+* AfsnitsController
+*
+* Skal:		Vise et oversigtsbillede over indlagte i afsnittet
+*					Tillade indlæggelser og udskrivelser
+*					Kunne tildele sengepladser
+*
+*					Kunne vise et udskriftsvenligt billede med noter på samtlige indlagte
+**/
 
 namespace App\Controller;
 
@@ -24,91 +24,84 @@ use Symfony\Component\HttpFoundation\Session\SessionInterface;
 class AfsnitsController extends AbstractController
 {
 
-	private $session;
+  private $session;
 
-	public function __construct(SessionInterface $session)
-	{
-		$this->session = $session;
-	}
+  public function __construct(SessionInterface $session)
+  {
+    $this->session = $session;
+  }
 
-	/**
-	 *
-	 * 	@Route("/afsnit", name="afsnit")
-	 **/
-	public function index(Request $request)
-	{
-		$sks= $this->session->get('sks');
+  /**
+  *
+  * 	@Route("/afsnit", name="afsnit")
+  **/
+  public function index(Request $request)
+  {
+    $sks= $this->session->get('sks');
 
-		if ($sks == null)
-		  return $this->redirectToRoute('selectafsnit');
+    if ($sks == null)
+    return $this->redirectToRoute('selectafsnit');
 
     $afsnit= $this->getDoctrine()
-		  ->getRepository(Afsnit::class)
-		  ->findOneBy(['sks' => $sks]);
+    ->getRepository(Afsnit::class)
+    ->findOneBy(['sks' => $sks]);
 
 
     $admission= $afsnit->getAdmissions();
+
+    // Et tomt afsnit uden indlagte patienter kræver særskilt billede
+
+    if ($admission == null)
+    {
+      return $this->render('afsnits/index1.html.twig', [
+      'afsnit' => $afsnit,
+      ]);
+    }
 
     $nlayout= ["Anamnese", "CNS", "Pulm", "Card",];
 
     $slayout= ["St 3-1", "St 3-2", "St 1-1", "St 1-2",];
 
 
-    if ($admission == null)
+
+    $p=  $afsnit->getBeds();
+    foreach ($p as $value)
     {
-		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
-		'St 3-2' => '123465-5194  Hans Larsen',
-		'St 1-1' => '',
-		'St 1-2' => '131548-1561  Birger Jensen',
-		'St 2-1' => '',
-		'St 2-2' => '213456-1545  Helle Madsen',
-		'St 5'   => '',
-		'St 6'   => '',
-		'St 7'   => '181415-1478  Dolly Parton',
-		'St 8'   => '',
+      $pliste[$value]= null;
+    }
 
-		);
-	}
-	else
-	{
+    $i= 0;
+    foreach ($admission as $value)
+    {
+      // $pliste[$value->getBed()]= $value->getPatient()->getCprN() . " - " . $value->getPatient()->getNavn();
+      $pliste[$value->getBed()]= $i++;
 
-		$pliste=   array ('St 3-1' => '011244-2048  Tove Jensen',
-		'St 3-2' => '123465-5194  Hans Larsen',
-		'St 1-1' => '111111-1818  Nis Nissen',
-		'2.1' => 'Test1',
-		'2.2' => null,
-		'2.3' => 'Test3',
-		);
+    }
 
-		foreach ($admission as $value)
-		{
-      $pliste[]= $value->getPatient()->getCprN() . " - " . $value->getPatient()->getNavn();
-		}
-	}
 
-		$teksten = array ('Anamnese:'=> 'Kort anamnese med baggrunden for opholdet',
-		'CNS:' => 'Test2',
-		'Pulm:'=> 'Test3',
-		'Card:'=> 'Test4',
-		'Gas:' => 'Test5',
-		'Ren' => 'Test6',
-		'Inf:' => 'Infektionsmæssig status',
-		'Hæm:' => 'Infektionsmæssig status',
-		'Endo:' => 'Test7',
-		'Væske:' => 'Væskestatus',
-		'Andet:' => 'Andre problemstillinger',
-		'Plan:' => 'Plan for kommende vagtperiode' );
+    $teksten = array ('Anamnese:'=> 'Kort anamnese med baggrunden for opholdet',
+    'CNS:' => 'Test2',
+    'Pulm:'=> 'Test3',
+    'Card:'=> 'Test4',
+    'Gas:' => 'Test5',
+    'Ren' => 'Test6',
+    'Inf:' => 'Infektionsmæssig status',
+    'Hæm:' => 'Infektionsmæssig status',
+    'Endo:' => 'Test7',
+    'Væske:' => 'Væskestatus',
+    'Andet:' => 'Andre problemstillinger',
+    'Plan:' => 'Plan for kommende vagtperiode' );
 
 
 
 
-		return $this->render('afsnits/index.html.twig', [
-		'indlagte' => $pliste,
-		'mydata' => $teksten,
-		'afsnit' => $afsnit,
-		'nlayout' => $nlayout,
-		'slayout' => $slayout,
-		'admission' => $admission,
-		]);
-	}
+    return $this->render('afsnits/index.html.twig', [
+    'indlagte' => $pliste,
+    'mydata' => $teksten,
+    'afsnit' => $afsnit,
+    'nlayout' => $nlayout,
+    'slayout' => $slayout,
+    'admission' => $admission,
+    ]);
+  }
 }

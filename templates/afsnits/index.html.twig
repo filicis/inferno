@@ -30,8 +30,10 @@
 						  <a class="disabled" href="#">{{ key }}</a>
 						</div>
 						<div class="col-10 text-left bg-secondary">
-						  {% if item %}
- 							  <a class= "" href="#carouselExampleControls" role="button" data-slide-to="3">{{ item }}</a>
+						  {% if item > -1 %}
+ 							  <a class= "carousel-control" href="#carouselExampleControls" role="button" data-slide-to={{item}}>
+ 							    {{ admission[item].getPatient().getCprN() }} - {{ admission[item].getPatient().getNavn() }}
+ 							  </a>
  							{% else %}
  							  <p></p>
  						  {% endif %}
@@ -49,11 +51,14 @@
     	<div class="col-xl-8">
 
       {# Caousel Test Start#}
-      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
+      <div id="carouselExampleControls" class="carousel slide" data-ride="carousel" data-interval=false>
         <div class="carousel-inner">
-          {% for key,item in indlagte %}
+          {% for key,item in admission %}
             <div class="carousel-item {% if loop.first %} active {% endif %}">
-		          <h6 class="alert alert-info text-left">CPR: 011244-2048 - Navn: Tove Jensen - Afd: A1</h6>
+		          <h6 class="alert alert-info text-left">
+		            CPR: {{ item.getPatient().getCprN() }} - Navn: {{ item.getPatient().getNavn() }} - Afd: A1
+		          </h6>
+
     	        <form class="row">
     	          {% for key1,item1 in mydata %}
                   <!-- div class= "form-group" -->

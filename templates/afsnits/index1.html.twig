@@ -1,0 +1,24 @@
+{#
+		Afsnit
+
+		- Oversigtsbillede over det aktuelle afsnit med senge, patienter og anamnese
+#}
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Inferno: {% endblock %}
+
+{% block body %}
+
+  <div class="container-xl">
+    <h1 class="text-center">{{ afsnit.navn }}</h1>
+    <p></p>
+    <div class="alert alert-warning" role="alert">
+      Afsnittet er tomt uden indlagte patienter
+    </div>
+
+
+    <a class="btn btn-primary" role="button" href="admission">Indlæg ny</a>
+	</div>
+
+{% endblock %}
