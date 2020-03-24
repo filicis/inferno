@@ -47,9 +47,15 @@ class Patient
      */
     private $admissions;
 
+    /**
+     * @ORM\OneToMany(targetEntity="App\Entity\Noter", mappedBy="patient")
+     */
+    private $noters;
+
     public function __construct()
     {
         $this->admissions = new ArrayCollection();
+        $this->noters = new ArrayCollection();
     }
 
 
@@ -170,6 +176,37 @@ class Patient
 
       return substr($cpr, 0, 6 ) . "-" . substr($cpr, 6);
 
+    }
+
+    /**
+     * @return Collection|Noter[]
+     */
+    public function getNoters(): Collection
+    {
+        return $this->noters;
+    }
+
+    public function addNoter(Noter $noter): self
+    {
+        if (!$this->noters->contains($noter)) {
+            $this->noters[] = $noter;
+            $noter->setPatient($this);
+        }
+
+        return $this;
+    }
+
+    public function removeNoter(Noter $noter): self
+    {
+        if ($this->noters->contains($noter)) {
+            $this->noters->removeElement($noter);
+            // set the owning side to null (unless already changed)
+            if ($noter->getPatient() === $this) {
+                $noter->setPatient(null);
+            }
+        }
+
+        return $this;
     }
 
 

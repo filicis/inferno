@@ -65,9 +65,12 @@ class AfsnitsController extends AbstractController
 
 
     $p=  $afsnit->getBeds();
-    foreach ($p as $value)
+    if (isset($p) == true)
     {
-      $pliste[$value]= null;
+      foreach ($p as $value)
+      {
+        $pliste[$value]= null;
+      }
     }
 
     $i= 0;

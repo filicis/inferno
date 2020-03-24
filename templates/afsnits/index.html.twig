@@ -27,7 +27,14 @@
         {% for key,item in indlagte %}
 				  <div class="row small">
          	  <div class="col-2 text-left">
-						  <a class="disabled" href="#"">{{ key }}</a>
+         	    <div class="dropdown">
+						  <a class="dropdown-toggle" href="#"  id="dropdownMenuLink" data-toggle="dropdown">{{ key }}</a>
+						  <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+						    <a class="dropdown-item" href="#">Action 1</a>
+						    <a class="dropdown-item" href="#">Action 2</a>
+						    <a class="dropdown-item" href="#">Action 3</a>
+						  </div>
+						  </div>
 						</div>
 						<div class="col-10 text-left bg-secondary">
 						  {% if item > -1 %}
@@ -101,7 +108,8 @@
         </form>
 #}
         <p>Her står en tekst omkring relevante patient</p>
-        <a class="btn btn-primary" role="button" href="admission">Indlæg ny</a>
+        <a class="btn btn-primary" role="button" href="admission">Ny Patient</a>
+        <a class="btn btn-primary" id="dummytest" role="button" href="note">Ny Note</a>
     	</div>
 
 

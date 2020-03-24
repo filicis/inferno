@@ -1,0 +1,25 @@
+{#
+    Note
+#}
+
+
+{% extends 'base.html.twig' %}
+
+{% block title %}Hello NoteController!{% endblock %}
+
+{% block body %}
+
+  <div class="container-xl">
+  <h1 class="text-center">{{ afsnit.navn }}</h1>
+    <div class="card">
+      <div class="card-body">
+		    <h6 class="card-title alert alert-info text-left">
+		      CPR: {{ admission.getPatient().getCprN() }} - Navn: {{ admission.getPatient().getNavn() }} - Afd: A1
+		    </h6>
+        <p>
+          {{ form(form) }}
+        </p>
+      </div>
+    </div>
+  </div>
+{% endblock %}

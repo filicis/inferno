@@ -4,11 +4,11 @@
 //
 //		Indeholder kort resume af et specifikt sygdomsforløb
 //
-//		id				
+//		id
 //		forfatter			Lægen der har skrevet resumeet
 //		skrevet				Dato
 //		patient
-//		tekst				
+//		tekst
 
 namespace App\Entity;
 
@@ -42,9 +42,10 @@ class Noter
     private $tekst = [];
 
     /**
-     * @ORM\Column(type="integer")
+     * @ORM\ManyToOne(targetEntity="App\Entity\Patient", inversedBy="noters")
      */
     private $patient;
+
 
     public function getId(): ?int
     {
@@ -87,15 +88,16 @@ class Noter
         return $this;
     }
 
-    public function getPatient(): ?int
+    public function getPatient(): ?Patient
     {
         return $this->patient;
     }
 
-    public function setPatient(int $patient): self
+    public function setPatient(?Patient $patient): self
     {
         $this->patient = $patient;
 
         return $this;
     }
+
 }
