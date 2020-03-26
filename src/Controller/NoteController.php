@@ -61,25 +61,24 @@ class NoteController extends AbstractController
     'Gas' => 'Test5',
     'Ren' => 'Test6',
     'Inf' => "Infektionsmæssig status",
-    "Hæm" => 'Infektionsmæssig status',
+    "Hem" => 'Infektionsmæssig status',
     'Endo' => 'Test7',
-    'Væske' => 'Væskestatus',
+    'Veske' => 'Væskestatus',
     'Andet' => 'Andre problemstillinger',
     'Plan' => 'Plan for kommende vagtperiode' );
 
 
 
-    $defaultData = ['message' => 'Type your message here'];
-    $form= $this->createFormBuilder($defaultData)
-    //->add('tekst', CollectionType::class, ['entry_type' => TextareaType::class])
-    ->add('cpr', TextType::class, ['mapped' => false] )
-    ->add('Send', SubmitType::class)
+    $form= $this->createFormBuilder()
+		// ->add('select', SubmitType::class , ['label' => 'Vælg'] )
+		->add('Card', TextareaType::class)
+		->add('Anamnese', TextareaType::class)
     ->getForm();
 
     $form->handleRequest($request);
 
 
-    if ($form->isSubmitted() && $form->isValid())
+    if ($form->isSubmitted() && $form->isValid() && false)
     {
       $data= $form->getData();
 
@@ -88,6 +87,7 @@ class NoteController extends AbstractController
       $note->setPatient($admission->getPatient());
 
       $note->setTekst($data);
+      //$note->setTekst($request->get('Gas'));
       //$note->setTekst($teksten);
 
       $entityManager = $this->getDoctrine()->getManager();
