@@ -66,16 +66,17 @@
 		            CPR: {{ item.getPatient().getCprN() }} - Navn: {{ item.getPatient().getNavn() }} - Afd: A1
 		          </h6>
 
-    	        <form class="row">
+    	        <form>
     	          {% for key1,item1 in mydata %}
-                  <!-- div class= "form-group" -->
-                  <div class="col-sm-2 text-right">
+                  <div class= "form-row">
+                  <div class="col-sm-2 text-right font-weight-bold">
                     <label for="{{ key1 }}">{{ key1 }}</label>
                   </div>
-                  <div class="col-sm-10">
-                    <textarea class="form-control" id="{{ key1 }}" inputstl rows="1">{{item1}}</textarea>
+                  <div class="col-sm-10 text-left">
+                    {{item1}}
+                    <!-- textarea class="form-control" id="{{ key1 }}" inputstl rows="1">{{item1}}</textarea -->
 					        </div>
-                  <!-- /div -->
+                  </div>
                 {% endfor %}
               </form>
             </div>

@@ -47,6 +47,13 @@ class Noter
     private $patient;
 
 
+    public function __construct()
+    {
+        $this->skrevet= new \DateTime();
+    }
+
+
+
     public function getId(): ?int
     {
         return $this->id;

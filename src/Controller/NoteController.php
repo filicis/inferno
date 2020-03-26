@@ -23,15 +23,15 @@ use Symfony\Component\Form\Extension\Core\Type\CollectionType;
 class NoteController extends AbstractController
 {
   /**
-   * @Route("/note/{id}", name="note")
-   *
-   **/
+  * @Route("/note/{id}", name="note")
+  *
+  **/
 
   public function index(int $id= 1, Request $request)
   {
-      //
-      // Først henter vi aktuelle Afsnit (efter Session variablen SKS)
-      //
+    //
+    // Først henter vi aktuelle Afsnit (efter Session variablen SKS)
+    //
 
     $sks= $request->getsession()->get('sks');
 
@@ -42,50 +42,67 @@ class NoteController extends AbstractController
     ->getRepository(Afsnit::class)
     ->findOneBy(['sks' => $sks]);
 
-      //
-      // Så henter vi aktuelle Admission
-      //
+    //
+    // Så henter vi aktuelle Admission
+    //
 
     $admission= $this->getDoctrine()
     ->getRepository(Admission::class)
     ->find($id);
 
-      //
-      //  Vi opretter en ny Note
-      //
+    //
+    //  Vi opretter en ny Note
+    //
 
-    $teksten = array ('Anamnese:'=> 'Kort anamnese med baggrunden for opholdet',
-    'CNS:' => 'Test2',
-    'Pulm:'=> 'Test3',
-    'Card:'=> 'Test4',
-    'Gas:' => 'Test5',
+    $teksten = array ('Anamnese'=> 'Kort anamnese med baggrunden for opholdet',
+    'CNS' => 'Test2',
+    'Pulm'=> 'Test3',
+    'Card'=> 'Test4',
+    'Gas' => 'Test5',
     'Ren' => 'Test6',
-    'Inf:' => 'Infektionsmæssig status',
-    'Hem:' => 'Infektionsmæssig status',
-    'Endo:' => 'Test7',
-    'Veske:' => 'Væskestatus',
-    'Andet:' => 'Andre problemstillinger',
-    'Plan:' => 'Plan for kommende vagtperiode' );
+    'Inf' => "Infektionsmæssig status",
+    "Hæm" => 'Infektionsmæssig status',
+    'Endo' => 'Test7',
+    'Væske' => 'Væskestatus',
+    'Andet' => 'Andre problemstillinger',
+    'Plan' => 'Plan for kommende vagtperiode' );
 
 
 
-    $note= new Noter();
-    $note->setTekst($teksten);
-    $note->setPatient($admission->getPatient());
+    $defaultData = ['message' => 'Type your message here'];
+    $form= $this->createFormBuilder($defaultData)
+    //->add('tekst', CollectionType::class, ['entry_type' => TextareaType::class])
+    ->add('cpr', TextType::class, ['mapped' => false] )
+    ->add('Send', SubmitType::class)
+    ->getForm();
 
-    $form= $this->createFormBuilder($note)
-      ->add('tekst', CollectionType::class, ['entry_type' => TextareaType::class])
-      ->add('Send', SubmitType::class)
-      ->getForm();
+    $form->handleRequest($request);
 
-    if ($form->isSubmitted() && $form->isValid()) {
-  }
+
+    if ($form->isSubmitted() && $form->isValid())
+    {
+      $data= $form->getData();
+
+      $note= new Noter();
+      $note->setForfatter("micras");
+      $note->setPatient($admission->getPatient());
+
+      $note->setTekst($data);
+      //$note->setTekst($teksten);
+
+      $entityManager = $this->getDoctrine()->getManager();
+      $entityManager->persist($note);
+      $entityManager->flush();
+      return $this->redirectToRoute('afsnit');
+
+    }
 
     return $this->render('note/index.html.twig', [
     'controller_name' => 'NoteController',
     'afsnit' => $afsnit,
     'admission' => $admission,
     'form' => $form->createView(),
+    'noter' => $teksten,
     ]);
   }
 }
