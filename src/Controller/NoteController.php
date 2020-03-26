@@ -67,12 +67,17 @@ class NoteController extends AbstractController
     'Andet' => 'Andre problemstillinger',
     'Plan' => 'Plan for kommende vagtperiode' );
 
+    $note1= new Noter();
+    $note1->setTekst($teksten);
 
-
-    $form= $this->createFormBuilder()
+    $form= $this->createFormBuilder($note1)
 		// ->add('select', SubmitType::class , ['label' => 'Vælg'] )
-		->add('Card', TextareaType::class)
-		->add('Anamnese', TextareaType::class)
+		//->add('Card', TextareaType::class)
+		//->add('Anamnese', TextareaType::class)
+		->add('tekst', CollectionType::class, ['entry_type' => TextareaType::class,
+		                                       'prototype_name' => '__index__',
+		                                       'label_format' => '%name%',
+		                                       'entry_options' => ['attr' => ['class' => 'form-control', 'rows' => '1',]]])
     ->getForm();
 
     $form->handleRequest($request);
