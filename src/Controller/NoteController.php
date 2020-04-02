@@ -6,6 +6,8 @@ use App\Entity\Afsnit;
 use App\Entity\Admission;
 use App\Entity\Noter;
 
+use App\Form\NoteType;
+
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -17,6 +19,8 @@ use Symfony\Component\Form\Extension\Core\Type\TextType;
 use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 use Symfony\Component\Form\Extension\Core\Type\SubmitType;
 use Symfony\Component\Form\Extension\Core\Type\CollectionType;
+use Symfony\Component\Form\CallbackTransformer;
+
 
 
 
@@ -54,6 +58,9 @@ class NoteController extends AbstractController
     //  Vi opretter en ny Note
     //
 
+    $nlayout= [10 => "Status", "Anamnese", "CNS", "Pulm", "Card", "Gas", "Ren". "Inf",];
+
+
     $teksten = array ('Anamnese'=> 'Kort anamnese med baggrunden for opholdet',
     'CNS' => 'Test2',
     'Pulm'=> 'Test3',
@@ -67,18 +74,26 @@ class NoteController extends AbstractController
     'Andet' => 'Andre problemstillinger',
     'Plan' => 'Plan for kommende vagtperiode' );
 
+
     $note1= new Noter();
     $note1->setTekst($teksten);
 
+/*
     $form= $this->createFormBuilder($note1)
 		// ->add('select', SubmitType::class , ['label' => 'Vælg'] )
-		//->add('Card', TextareaType::class)
+		//->add('Hæmatologisk', TextareaType::class)
 		//->add('Anamnese', TextareaType::class)
-		->add('tekst', CollectionType::class, ['entry_type' => TextareaType::class,
-		                                       'prototype_name' => '__index__',
+		->add('noteTekst', CollectionType::class, ['entry_type' => TextareaType::class,
+		                                       //'allow_add' => true,
+		                                       //'prototype_name' => '__index__',
 		                                       'label_format' => '%name%',
-		                                       'entry_options' => ['attr' => ['class' => 'form-control', 'rows' => '1',]]])
+		                                       'block_prefix' => null,
+		                                       //'by_reference'=> false,
+		                                       'entry_options' => ['attr' => ['class' => 'form-control', 'rows' => '2',]]])
+
     ->getForm();
+*/
+    $form = $this->createForm(NoteType::class, $note1);
 
     $form->handleRequest($request);
 
@@ -107,7 +122,8 @@ class NoteController extends AbstractController
     'afsnit' => $afsnit,
     'admission' => $admission,
     'form' => $form->createView(),
-    'noter' => $teksten,
+    'noter' => array_values($teksten),
+    'keys' => $note1->getKeys(),
     ]);
   }
 }

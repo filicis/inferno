@@ -58,7 +58,7 @@ class AfsnitsController extends AbstractController
       ]);
     }
 
-    $nlayout= ["Anamnese", "CNS", "Pulm", "Card",];
+    $nlayout= ["Anamnese", "CNS", "Pulm", "Card", "Gas", "Ren". "Inf",];
 
     $slayout= ["St 3-1", "St 3-2", "St 1-1", "St 1-2",];
 

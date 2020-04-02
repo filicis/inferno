@@ -94,6 +94,26 @@ class Noter
 
         return $this;
     }
+    
+    public function getValues() : ?array
+    {
+        return array_values($this->getTekst());
+    }
+    
+    
+    public function setValues(array $values): self
+    {
+        $keys= array_keys($this->getTekst());
+        $this->setTekst(array_combine($this->keys, $values));
+        
+        return $this;
+    }
+    
+    
+    public function getKeys() : ?array
+    {
+      return array_keys($this->getTekst());
+    }
 
     public function getPatient(): ?Patient
     {
