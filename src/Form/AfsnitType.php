@@ -11,6 +11,7 @@ use Symfony\Component\OptionsResolver\OptionsResolver;
 
 use Symfony\Component\Form\CallbackTransformer;
 use Symfony\Component\Form\Extension\Core\Type\TextType;
+use Symfony\Component\Form\Extension\Core\Type\TextareaType;
 
 
 class AfsnitType extends AbstractType
@@ -22,8 +23,8 @@ class AfsnitType extends AbstractType
     ->add('kortnavn')
     ->add('navn')
     //->add('oprettet')
-    ->add('beds', TextType::class)
-    ->add('notefelter', TextType::class)
+    ->add('beds', TextareaType::class)
+    ->add('notefelter', TextareaType::class)
     //->add('afdeling')
     ;
 
@@ -32,7 +33,7 @@ class AfsnitType extends AbstractType
       ->addModelTransformer(new CallbackTransformer(
         function ($bedsAsArray) {
           // transform the array to a string
-          return json_encode($bedsAsArray);
+          return json_encode($bedsAsArray, JSON_PRETTY_PRINT + JSON_UNESCAPED_UNICODE);
         },
         function ($bedsAsString) {
           // transform the string back to an array
@@ -44,7 +45,7 @@ class AfsnitType extends AbstractType
       ->addModelTransformer(new CallbackTransformer(
         function ($notefelterAsArray) {
           // transform the array to a string
-          return json_encode($notefelterAsArray);
+          return json_encode($notefelterAsArray, JSON_PRETTY_PRINT + JSON_UNESCAPED_UNICODE);
         },
         function ($notefelterAsString) {
           // transform the string back to an array

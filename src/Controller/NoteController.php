@@ -1,5 +1,16 @@
 <?php
 
+/*
+* This file is part of the Inferno package.
+*
+* (c) Michael Lindhardt Rasmussen <mlr@dadlnet.dk>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
+
+
 namespace App\Controller;
 
 use App\Entity\Afsnit;
@@ -53,6 +64,16 @@ class NoteController extends AbstractController
     $admission= $this->getDoctrine()
     ->getRepository(Admission::class)
     ->find($id);
+
+    //
+    //  Seneste note på aktuelle patient henstes ind
+    //
+
+    $oldnote= $this->getDoctrine()
+    ->getRepository(Noter::class)
+    ->findOneBy(['patient' => $id], ['skrevet' => 'DESC']);
+
+
 
     //
     //  Vi opretter en ny Note
