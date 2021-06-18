@@ -14,23 +14,20 @@
 
   <div class="container-md">
     <div class="card">
+      <h3 class="card-header alertt alertt-success text-center">Opsætning af Afsnit </h3>
+
       <div class="card-body">
-        <h3 class="card-title alert alert-success text-center">Opsætning af Afsnit </h3>
+        {# <h3 class="card-title alert alert-success text-center">Opsætning af Afsnit </h3> #}
 
         {{ form_start(form, {'attr': {'novalidate': 'novalidate'}}) }}
-    {{ form_widget(form) }}
-
+          {{ form_widget(form) }}
           <div class="form-group row">
-        <div class="col-2"></div>
-          <div class="col">
+            {# <div class="col-2"></div> #}
+            <div class="col">
                 <input type="submit" value="Send" class="btn btn-success" />
+            </div>
           </div>
-      </div>
-
-
-{{ form_end(form) }}
-
-
+        {{ form_end(form) }}
       </div>
     </div>
   </div>

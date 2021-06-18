@@ -1,12 +1,21 @@
 <?php
 
+/*
+* This file is part of the Inferno package.
+*
+* (c) Michael Lindhardt Rasmussen <mlr@dadlnet.dk>
+*
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
 namespace App\Controller;
 
 use Twig\Environment;
 use Twig\Extensions\IntlExtension;
 
 use App\Entity\Afsnit;
-use App\Form\AfsnitType;
+use App\Form\Type\AfsnitType;
 
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
@@ -31,7 +40,7 @@ class AfsnitsindstillingerController extends AbstractController
 	}
 
     /**
-     * @Route("/admin/afsnitsindstillinger", name="afsnitsindstillinger")
+     * @Route("/admin/afsnitsindstillinger3", name="afsnitsindstillinger3")
      */
     public function index()
     {
@@ -94,7 +103,7 @@ class AfsnitsindstillingerController extends AbstractController
         ]);
     }
     /**
-     * @Route("/admin/afsnitsindstillinger2", name="afsnitsindstillinger2")
+     * @Route("/admin/afsnitsindstillinger", name="afsnitsindstillinger")
      */
     public function index2(Request $request)
     {
@@ -124,6 +133,9 @@ class AfsnitsindstillingerController extends AbstractController
 			  $entityManager = $this->getDoctrine()->getManager();
 			  $entityManager->persist($afsnit);
 			  $entityManager->flush();
+			  
+			  return $this->redirectToRoute('afsnit');
+
 
       }
 

@@ -1,15 +1,17 @@
 <?php
 
-/**
+
+/*
+* This file is part of the Inferno package.
 *
-* AfsnitsController
+* (c) Michael Lindhardt Rasmussen <mlr@dadlnet.dk>
 *
-* Skal:		Vise et oversigtsbillede over indlagte i afsnittet
-*					Tillade indlæggelser og udskrivelser
-*					Kunne tildele sengepladser
-*
-*					Kunne vise et udskriftsvenligt billede med noter på samtlige indlagte
-**/
+* For the full copyright and license information, please view the LICENSE
+* file that was distributed with this source code.
+*/
+
+
+
 
 namespace App\Controller;
 
@@ -20,6 +22,17 @@ use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Session\Session;
 use Symfony\Component\HttpFoundation\Session\SessionInterface;
+
+/**
+*
+* AfsnitsController
+*
+* Skal:		Vise et oversigtsbillede over indlagte i afsnittet
+*					Tillade indlæggelser og udskrivelser
+*					Kunne tildele sengepladser
+*
+*					Kunne vise et udskriftsvenligt billede med noter på samtlige indlagte
+**/
 
 class AfsnitsController extends AbstractController
 {
